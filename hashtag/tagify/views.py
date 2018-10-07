@@ -217,38 +217,48 @@ class getTag(View):
             data['faces'] = list({x['gender']: x['age']} for x in response.get("faces"))
 
         print ('response')
-        api = datamuse.Datamuse()
-        pi = api.words(ml='wedding', max=50)
-        pi = list(x['word'] for x in pi)
+        # api = datamuse.Datamuse()
+        # pi = api.words(ml='wedding', max=100)
+        # pi = list(x['word'] for x in pi)
         print('------------------')
-        print(pi)
+        # print(pi)
         print('------------------')
         tg = 'marriage'
-        search = Category.objects.filter(keywords__contains=[tg])
-        if search.exists():
-            print('jikp')
-            print(search)
-            pass
-        else:
-            Category.objects.create(name=tg, keywords=pi)
+        # search = Category.objects.filter(keywords__contains=[tg])
+        # if search.exists():
+        #     print('jikp')
+        #     print(search)
+        #     pass
+        # else:
+        #     Category.objects.create(name=tg, keywords=pi)
+        wh_cat = WhoopeeCategory()
+        cat = wh_cat.whoopee_cat('ticket')
+        t = HashTag1
+        pi = t.whoopee_hashtag('ticket').get('data')
+        pi = list(x['tag'] for x in pi)
+        po = Hashtag.objects.filter(category_id=cat)
+        print('catyyy')
+        print (cat)
+        if not po.exists():
+            Hashtag.objects.create(category_id=cat, text_hashtag=pi)
         print (data)
+
+        print('------------------')
         print (pi)
+        print('------------------')
         print('brainy qoutes')
         # print(pybrainyquote.get_quotes('inspirational', 5000))
-        g = grab
-        print (g.get_quotes('friendship'))
+        # g = grab
+        # print (g.get_quotes('ticket'))
+        h = Hashtag.objects.filter()
         return HttpResponse("Hello World")
         # The 'analysis' object contains various fields that describe the image. The most
         # relevant caption for the image is obtained from the 'description' property.
 
 
 
-class BrainyQuotes:
+class BrainyQuotes1:
     def grab_quotes(self, type):
-        pass
-class grab(View):
-
-    def get_quotes(type, number_of_quotes=1):
         url = "http://www.brainyquote.com/quotes/topics/topic_" + type + ".html"
         # url = "https://www.azquotes.com/quotes/topics/sassy.html?p=1"
         response = requests.get(url)
@@ -257,7 +267,7 @@ class grab(View):
         print('spoup')
         # print(soup)
         for quote in soup.find_all('a', {'title': ['view quote', 'view author']}):
-        # for quote in soup.find_all('a', {'class': ['title']}):
+            # for quote in soup.find_all('a', {'class': ['title']}):
             print ('quotes')
             # print (quote.get('data-author'))
             if quote.img:
@@ -267,8 +277,99 @@ class grab(View):
             print('--=-=-=-=-=-=-=--=-=---=')
             # print(quote.contents[0])
             quotes.append(quote.contents[0])
-        # random.shuffle(quotes)
         print('hibs')
         print(quotes)
-        result = quotes[:number_of_quotes]
-        return result
+        return quotes
+
+
+class BrainyQuotes:
+    def grab_quotes(type):
+        url = "http://www.brainyquote.com/quotes/topics/topic_" + type + ".html"
+        # url = "https://www.azquotes.com/quotes/topics/sassy.html?p=1"
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "html.parser")
+        quotes = []
+        print('spoup')
+        # print(soup)
+        wh_cat = WhoopeeCategory()
+        cat = wh_cat.whoopee_cat(type)
+        for quote in soup.find_all('a', {'title': ['view author', 'view quote']}):
+            # for quote in soup.find_all('a', {'class': ['title']}):
+            if not quote.img:
+                if quote.get('title') == 'view quote':
+                    q = Quote.objects.filter(text_quote=quote.contents[0])
+                    if not q.exists():
+                        qid = Quote.objects.create(text_quote=quote.contents[0], category_id=cat)
+                elif quote.get('title') == 'view author':
+                    wh_author = WhoopeeAuthor
+                    aut = wh_author.whoopee_author(quote.contents[0])
+                    if not q.exists():
+                        Quote.objects.filter(id=qid.id).update(author_id=aut)
+                    else:
+                        Quote.objects.filter(id=q.first().id).update(author_id=aut)
+
+class WhoopeeCategory:
+    def __init__(self):
+        self.synonym = datamuse.Datamuse()
+
+    def whoopee_cat(self, cat_name):
+        exist_cat = Category.objects.filter(name=cat_name)
+        if exist_cat.exists():
+            cat = exist_cat.first()
+        else:
+            keywords = self.synonym.words(ml=cat_name, max=100)
+            keys = list(keyword['word'] for keyword in keywords)
+            cat = Category.objects.create(name=cat_name, keywords=keys)
+            print('varun')
+            print(cat_name)
+            print(cat)
+        return cat.id
+
+
+class WhoopeeAuthor:
+    def whoopee_author(author):
+        exist_author = Author.objects.filter(name=author)
+        if exist_author.exists():
+            auth = exist_author.first()
+        else:
+            auth = Author.objects.create(name=author)
+        return auth.id
+
+class HashTag1:
+    def whoopee_hashtag(tag):
+        url = "https://tagify.io/api/v3/recommendations?type=tag&q=" + tag + "&count=100"
+        response = requests.get(url)
+        print(response)
+        print (response.status_code)
+        # print(response.json())
+        return response.json()
+
+class grab(View):
+
+    def get_quotes(type, number_of_quotes=1):
+        # url = "http://www.brainyquote.com/quotes/topics/topic_" + type + ".html"
+        url = "https://www.azquotes.com/quotes/topics/" + type + ".html?p=1"
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "html.parser")
+        quotes = []
+        print('spoup')
+        # print(soup)
+        # for quote in soup.find_all('a', {'title': ['view quote', 'view author']}):
+        wh_cat = WhoopeeCategory()
+        cat = wh_cat.whoopee_cat(type)
+        for quote in soup.find_all('a', {'class': ['title']}):
+            print ('quotes')
+            # print (quote.get('data-author'))
+
+            if not quote.img:
+                wh_author = WhoopeeAuthor
+                aut = wh_author.whoopee_author(quote.get('data-author'))
+                q = Quote.objects.filter(text_quote=quote.contents[0])
+                if not q.exists():
+                    qid = Quote.objects.create(category_id=cat, author_id=aut, text_quote=quote.contents[0])
+            print('--=-=-=-=-=-=-=--=-=---=')
+            # print(quote.contents[0])
+            quotes.append(quote.contents[0])
+        print('hibs')
+        print(quotes)
+        return quotes
