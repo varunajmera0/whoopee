@@ -1,4 +1,5 @@
 python-datamuse
 beautifulsoup4
 djangorestframework
+pillow
 brainyquote
