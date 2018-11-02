@@ -1,7 +1,39 @@
-/** @format */
-
 import {AppRegistry} from 'react-native';
-import App from './App';
+import React, {Component} from 'react';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => App);
+import {Provider, connect} from 'react-redux';
+import {store, persistor} from './src/redux/store';
+import {PersistGate} from 'redux-persist/integration/react'
+
+import {createStackNavigator, createSwitchNavigator} from 'react-navigation';
+
+import App from './App';
+import Home from './src/components/Home';
+
+const AppStack = createStackNavigator({Home: Home});
+const AuthStack = createStackNavigator({SignIn: App});
+
+const WhoopeeRoutes = createSwitchNavigator(
+    {
+        App: AppStack,
+        Auth: AuthStack,
+    },
+    {
+        initialRouteName: 'Auth',
+    }
+);
+
+class Whoopee extends Component {
+    render() {
+        return (
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <WhoopeeRoutes />
+                </PersistGate>
+            </Provider>
+        );
+    }
+}
+
+AppRegistry.registerComponent(appName, () => Whoopee);

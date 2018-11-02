@@ -15,8 +15,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hashtag/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1890">
-              <caret line="126" column="44" lean-forward="false" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="44" />
+            <state relative-caret-position="525">
+              <caret line="35" column="34" lean-forward="false" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -25,13 +25,35 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tagify/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="338" column="0" lean-forward="false" selection-start-line="338" selection-start-column="0" selection-end-line="338" selection-end-column="0" />
+            <state relative-caret-position="-379">
+              <caret line="101" column="91" lean-forward="false" selection-start-line="101" selection-start-column="91" selection-end-line="101" selection-end-column="91" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tagify/tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pj.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tagify/pj.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5580">
+              <caret line="545" column="21" lean-forward="false" selection-start-line="545" selection-start-column="21" selection-end-line="545" selection-end-column="21" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-                <element signature="e#8043#13989#0" expanded="false" />
-                <element signature="e#17359#18241#0" expanded="false" />
-                <element signature="e#18266#19483#0" expanded="false" />
+                <element signature="e#10846#16792#0" expanded="false" />
+                <element signature="e#20859#21741#0" expanded="false" />
+                <element signature="e#21766#22983#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -40,8 +62,8 @@
       <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tagify/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="33" column="24" lean-forward="false" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="24" />
+            <state relative-caret-position="30">
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -52,8 +74,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tagify/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1500">
-              <caret line="105" column="14" lean-forward="false" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="14" />
+            <state relative-caret-position="1125">
+              <caret line="80" column="62" lean-forward="false" selection-start-line="80" selection-start-column="62" selection-end-line="80" selection-end-column="62" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -64,30 +86,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tagify/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tagify/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+            <state relative-caret-position="75">
+              <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="21" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -98,8 +98,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hashtag/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="24" column="65" lean-forward="false" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
+            <state relative-caret-position="255">
+              <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
               <folding>
                 <element signature="e#631#663#0" expanded="true" />
               </folding>
@@ -115,6 +115,10 @@
       <find>bra</find>
       <find>sett</find>
       <find>BASE_DIR</find>
+      <find>tagify</find>
+      <find>nested_dict</find>
+      <find>ObjectDoesNotExist</find>
+      <find>JsonResponse</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -128,12 +132,13 @@
         <option value="$PROJECT_DIR$/aiapp/admin.py" />
         <option value="$PROJECT_DIR$/aiapp/models.py" />
         <option value="$PROJECT_DIR$/tagify/admin.py" />
-        <option value="$PROJECT_DIR$/hashtag/settings.py" />
-        <option value="$PROJECT_DIR$/hashtag/urls.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/hashtag/settings.py" />
+        <option value="$PROJECT_DIR$/tagify/pj.py" />
+        <option value="$PROJECT_DIR$/tagify/serializers.py" />
+        <option value="$PROJECT_DIR$/hashtag/urls.py" />
         <option value="$PROJECT_DIR$/tagify/models.py" />
         <option value="$PROJECT_DIR$/tagify/urls.py" />
-        <option value="$PROJECT_DIR$/tagify/serializers.py" />
         <option value="$PROJECT_DIR$/tagify/views.py" />
       </list>
     </option>
@@ -147,7 +152,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="764" />
+    <option name="height" value="786" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -164,8 +169,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -202,34 +205,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="media" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="whoopee" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="2018" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hashtag" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hashtag" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="hashtag" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -462,21 +445,20 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="764" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="786" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16595136" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16452074" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2752976" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.518732" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -485,27 +467,6 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2767857" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16380544" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
@@ -520,92 +481,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tagify/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="115" column="22" lean-forward="false" selection-start-line="115" selection-start-column="22" selection-end-line="115" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#8043#13989#0" expanded="false" />
-            <element signature="e#17359#18241#0" expanded="false" />
-            <element signature="e#18266#19483#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tagify/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="26" column="32" lean-forward="false" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hashtag/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="1" lean-forward="false" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/aiapp/urls.py" />
-    <entry file="file://$PROJECT_DIR$/hashtag/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" column="34" lean-forward="false" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
-          <folding>
-            <element signature="e#631#663#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/aiapp/admin.py" />
-    <entry file="file://$PROJECT_DIR$/aiapp/views.py" />
-    <entry file="file://$PROJECT_DIR$/hashtag/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="1" lean-forward="false" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/aiapp/urls.py" />
-    <entry file="file://$PROJECT_DIR$/hashtag/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" column="34" lean-forward="false" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
-          <folding>
-            <element signature="e#631#663#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/aiapp/admin.py" />
-    <entry file="file://$PROJECT_DIR$/aiapp/views.py" />
-    <entry file="file://$PROJECT_DIR$/hashtag/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="1" lean-forward="false" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/aiapp/urls.py" />
-    <entry file="file://$PROJECT_DIR$/hashtag/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" column="34" lean-forward="false" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
-          <folding>
-            <element signature="e#631#663#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/aiapp/admin.py" />
-    <entry file="file://$PROJECT_DIR$/aiapp/views.py" />
     <entry file="file://$PROJECT_DIR$/aiapp/urls.py" />
     <entry file="file://$PROJECT_DIR$/aiapp/views.py" />
     <entry file="file://$PROJECT_DIR$/aiapp/migrations/__init__.py" />
@@ -620,13 +495,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tagify/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -658,11 +526,7 @@
     <entry file="file://$PROJECT_DIR$/tagify/migrations/0003_analytics.py" />
     <entry file="file://$PROJECT_DIR$/tagify/migrations/0003_auto_20181008_0751.py" />
     <entry file="file://$PROJECT_DIR$/tagify/migrations/0002_auto_20181008_0742.py" />
-    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/IMG-20180723-WA0006.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/IMG-20180723-WA0006.jpg" />
     <entry file="file://$PROJECT_DIR$/media/whoopee/%Y/%m/689f83e86d8941a293a59aee9acd6891.jpg" />
     <entry file="file://$PROJECT_DIR$/tagify/migrations/0003_auto_20181008_1251.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -671,16 +535,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/08/1d2a584b520b421db047121e7c59da8d.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/2d9aeeecf283492f89c56f4b9b1a3a3c.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/08/1d2a584b520b421db047121e7c59da8d.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/2d9aeeecf283492f89c56f4b9b1a3a3c.jpg" />
     <entry file="file://$PROJECT_DIR$/tagify/migrations/0002_auto_20181008_1240.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-52">
@@ -688,11 +544,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/7f9d9789d6c84b87ba4b8d49fae79493.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/7f9d9789d6c84b87ba4b8d49fae79493.jpg" />
     <entry file="file://$PROJECT_DIR$/tagify/migrations/0001_initial.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -700,49 +552,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/6a12e34b978b40fdaf9a9afc1746b16c.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/a844315acd0c48bc89546266fd373cc7.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hashtag/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="24" column="65" lean-forward="false" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
-          <folding>
-            <element signature="e#631#663#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hashtag/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="126" column="44" lean-forward="false" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tagify/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/6a12e34b978b40fdaf9a9afc1746b16c.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/a844315acd0c48bc89546266fd373cc7.jpg" />
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -750,41 +565,104 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tagify/models.py">
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/d3386d9cf3d94066ac3fdd4376664f50.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/1108d7438dac4008a4e9c001aeada09d.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/1344c770f81a4f1e8da21db1d3a462db.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/535fedddbb844299a0e2ea2718e79d0b.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/5db105fd07104491bbf43125e1504a97.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/whoopee/2018/10/e47fe78a3244424890e36ae36d1d333b.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/varun/image-030d6ef9-cc85-4639-b1ae-8e9bdad94d16_uiVrs5u.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/varun/image-987655c3-89b4-44d8-9ee9-1044291e5eee.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/varun/image-f65376b7-b820-44be-a413-eb312302b600.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/varun/image-bdeb4c72-0775-4b83-8bf1-e5fd8f6042ac_vbYPkiR.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/varun/image-030d6ef9-cc85-4639-b1ae-8e9bdad94d16.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/varun/image-bdeb4c72-0775-4b83-8bf1-e5fd8f6042ac.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/varun/image-bdeb4c72-0775-4b83-8bf1-e5fd8f6042ac_rjSHJuf.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/varun/image-5e6d0b2c-cff1-43f0-811e-43e57f6bff05.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/varun/image-5e6d0b2c-cff1-43f0-811e-43e57f6bff05_4lG5the.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/varun/image-5e6d0b2c-cff1-43f0-811e-43e57f6bff05_bNFWmGg.jpg" />
+    <entry file="file://$PROJECT_DIR$/tagify/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1500">
-          <caret line="105" column="14" lean-forward="false" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tagify/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="33" column="24" lean-forward="false" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="24" />
+        <state relative-caret-position="30">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tagify/views.py">
+    <entry file="file://$PROJECT_DIR$/tagify/pj.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="338" column="0" lean-forward="false" selection-start-line="338" selection-start-column="0" selection-end-line="338" selection-end-column="0" />
+        <state relative-caret-position="5580">
+          <caret line="545" column="21" lean-forward="false" selection-start-line="545" selection-start-column="21" selection-end-line="545" selection-end-column="21" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#8043#13989#0" expanded="false" />
-            <element signature="e#17359#18241#0" expanded="false" />
-            <element signature="e#18266#19483#0" expanded="false" />
+            <element signature="e#10846#16792#0" expanded="false" />
+            <element signature="e#20859#21741#0" expanded="false" />
+            <element signature="e#21766#22983#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hashtag/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+          <folding>
+            <element signature="e#631#663#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tagify/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hashtag/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="34" lean-forward="false" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tagify/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1125">
+          <caret line="80" column="62" lean-forward="false" selection-start-line="80" selection-start-column="62" selection-end-line="80" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tagify/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-379">
+          <caret line="101" column="91" lean-forward="false" selection-start-line="101" selection-start-column="91" selection-end-line="101" selection-end-column="91" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Whoopee</string>
+    <string name="facebook_app_id">603242690061898</string>
+    <string name="fb_login_protocol_scheme">fb603242690061898</string>
 </resources>

@@ -1,13 +1,13 @@
 from django.conf.urls import url
+
 from .views import (
-                    getTag,
-                    Getfuck,
-                    Getp
+                    AnalyzeImage,
+                    GetWhoopeeData,
+                    UserCreate
                     )
 
 urlpatterns = [
-    url(r'^varun/$', getTag.as_view()),
-    url(r'^getfuck/$', Getfuck.as_view()),
-    url(r'^getf/(?P<pk>(\d+))/$', Getfuck.as_view()),
-    url(r'^getp/(?P<pk>(\d+))/$', Getp.as_view()),
+    url(r'^analyzeImage/$', AnalyzeImage.as_view()),
+    url(r'^getWhoopeeData/(?P<pk>(\d+))/$', GetWhoopeeData.as_view()),
+    url(r'^userCreate/$', UserCreate.as_view()),
 ]

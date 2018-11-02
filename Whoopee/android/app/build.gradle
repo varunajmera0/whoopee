@@ -95,7 +95,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    buildToolsVersion '28.0.2'
 
     defaultConfig {
         applicationId "com.whoopee"
@@ -137,6 +137,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-admob')
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-image-picker')
     compile project(':react-native-fbsdk')
     compile project(':lottie-react-native')
     implementation fileTree(dir: "libs", include: ["*.jar"])

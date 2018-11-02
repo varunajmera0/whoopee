@@ -1,66 +1,136 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    Alert,
+    Dimensions,
+    Modal,
+    TouchableWithoutFeedback
+} from 'react-native';
+
 import LottieView from 'lottie-react-native';
+import {Button, Icon} from 'native-base';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import {FacebookManagerAction} from './src/redux/actions/AuthAction';
+import {connect} from 'react-redux';
+import {ModalAction} from "./src/redux/actions/ModalAction";
 
-type Props = {};
-export default class App extends Component<Props> {
-  componentDidMount() {
-    this.animation.play();
-    // Or set a specific startFrame and endFrame with:
-    this.animation.play(30, 120);
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-       
-        <LottieView
-        ref={animation => {
-          this.animation = animation;
-        }}
-        style={{
-        }}
-        source={require('./lottie.json')}
-        autoPlay
-        loop
-      />
-      </View>
-    );
-  }
+
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this._bootstrapAuthentication();
+        this.props.Modalstatus(false);
+    }
+
+    _bootstrapAuthentication = () => {
+        if (this.props.AuthInfo.accessToken != null) {
+            this.props.navigation.navigate('App');
+        } else {
+            this.props.navigation.navigate('Auth');
+        }
+    };
+
+    Authentication() {
+        this.props.Modalstatus(true);
+        this.props.Login()
+    }
+
+    ModalShow = () => {
+        return (
+            <Modal animationType="fade"
+                   transparent={true}
+                   visible={this.props.WhoopeeModal}
+                   onRequestClose={() => {
+                       Alert.alert('Modal has been closed.');
+                   }}>
+                <View style={{backgroundColor: '#FCFCFC', width: '100%', height: '100%'}}>
+                    <View style={{justifyContent: 'center', alignContent: 'center', flexDirection: 'row', marginTop: Dimensions.get('window').height/5 }}>
+                        <LottieView ref={animation => { this.animation = animation; }}
+                                    style={{width: '100%', height: '100%', justifyContent: 'center', alignContent: 'center'}}
+                                    source={require('./src/lottiesFiles/loader.json')}
+                                    autoPlay
+                                    loop
+                        />
+                    </View>
+                </View>
+            </Modal>
+        );
+    };
+
+    componentDidUpdate(prevProps) {
+        if (this.props.AuthInfo.accessToken != null) {
+            this.props.Modalstatus(false);  //componentDidUpdate runs every time when component update
+            this.props.navigation.navigate('App');
+        } else {
+            this.props.navigation.navigate('Auth');
+        }
+    }
+
+    static navigationOptions = ({ navigation }) => {
+        const { state } = navigation;
+        return {
+            headerTitle: 'Whoopee',
+            headerStyle: {
+                backgroundColor: '#35a79c',
+            },
+            headerTintColor: 'black',
+            headerTitleStyle: {
+                fontFamily: 'Comfortaa-Bold',
+            }
+        }
+    };
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={{flexDirection: 'row', alignItems: "center", justifyContent: "center",}}>
+                    <LottieView
+                        style={{height: 200}}
+                        source={require('./src/lottiesFiles/lottie.json')}
+                        autoPlay
+                        loop
+                    />
+
+                </View>
+                {this.ModalShow()}
+                {/*<View style={{height: 100, backgroundColor: 'red',}}>*/}
+                    <TouchableWithoutFeedback onPress={() => this.Authentication()} style={{width: 350, alignItems: "center", justifyContent: "center", backgroundColor: 'red'}}>
+                        <View style={{flexDirection: 'row', backgroundColor: 'white', width: 320, borderRadius: 30}}>
+                            <LottieView
+                                style={{height: 45, marginLeft: 6}}
+                                source={require('./src/lottiesFiles/facebook_.json')}
+                                autoPlay
+                                loop
+                            />
+                            <Text style={{color: "black", fontFamily: 'Comfortaa-Bold', fontSize: 19, paddingTop: 5, marginLeft:10, textAlign: 'center', alignItems: "center", justifyContent: "center",}}>Continue with Facebook</Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                {/*</View>*/}
+            </View>
+        );
+    }
 }
 
+const mapStateToProps = (state, props) => ({
+    AuthInfo: state.AuthReducer,
+    WhoopeeModal: state.ModalReducer.modalStatus,
+});
+
+const mapDispatchToProps = (dispatch, props) => ({
+    Login: () => dispatch(FacebookManagerAction()),
+    Modalstatus: modalStatus => dispatch(ModalAction(modalStatus))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#35a79c'
+    }
 });
