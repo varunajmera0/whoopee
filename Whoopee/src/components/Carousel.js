@@ -223,11 +223,11 @@ export default class Carousel extends Component {
                     <View key={index} style={{width: Dimensions.get('window').width,}}>
                         <View style={{flexDirection: 'row',}}>
                             <Left>
-                                <Icon type="FontAwesome" name='angle-double-left'  onPress={() => this._prevPage(this.state.currentPage)}/>
+                            
                             </Left>
 
                             <Right>
-                                {/* <Icon type='MaterialIcons' name='content-copy' onPress={async () => {
+                                <Icon type='MaterialIcons' name='content-copy' onPress={async () => {
                                     await Clipboard.setString(c.props.children + "\n" +'- '+c.props.author);
                                     ToastAndroid.showWithGravityAndOffset(
                                         'Quote copied successfully!',
@@ -236,27 +236,26 @@ export default class Carousel extends Component {
                                         50,
                                         100,
                                     );
-                                    }} style={{paddingTop: 8, paddingRight: 5}}/> */}
-                                     <Icon type="FontAwesome" name='angle-double-left'  onPress={() => this._prevPage(this.state.currentPage)}/>
+                                    }} style={{paddingTop: 8, paddingRight: 5}}/>
                             </Right>
                         </View>
                         <TouchableWithoutFeedback key={index} onPress={() => this.setState({currentPage: index})}>
-                            {/* <View style={{
+                            <View style={{
                                 width: Dimensions.get('window').width,
                                 flex: 0.9,
                                 flexDirection: 'row',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                            }}> */}
-                                {/* <View style={{width: '10%', alignItems: 'center', justifyContent: 'center'}}>
+                            }}>
+                                <View style={{width: '10%', alignItems: 'center', justifyContent: 'center'}}>
                                     <TouchableWithoutFeedback onPress={() => this._prevPage(this.state.currentPage)}>
                                         <View>
                                             <Icon type="FontAwesome" name='angle-double-left' />
                                         </View>
                                     </TouchableWithoutFeedback>
-                                </View> */}
+                                </View>
                                 
-                                <ScrollView style={{width: '80%', flex: 1}} 
+                                <ScrollView style={{width: '80%',}} 
                                 bounces
                                 decelerationRate={0.9}
                             
@@ -267,14 +266,14 @@ export default class Carousel extends Component {
                                     <Text style={{textAlign: 'right', fontSize: 18, fontFamily: 'Comfortaa-Bold',}}>{c.props.author ? '- '+c.props.author : ''}</Text>
                                 </ScrollView>
                                
-                                {/* <View style={{width: '10%', alignItems: 'center', justifyContent: 'center'}}>
+                                <View style={{width: '10%', alignItems: 'center', justifyContent: 'center'}}>
                                     <TouchableWithoutFeedback onPress={() => this._nextPage(this.state.currentPage)}>
                                         <View>
                                             <Icon type="FontAwesome" name='angle-double-right' />
                                         </View>
                                     </TouchableWithoutFeedback>
-                                </View> */}
-                            {/* </View> */}
+                                </View>
+                            </View>
                         </TouchableWithoutFeedback>
                     </View>
                 );
