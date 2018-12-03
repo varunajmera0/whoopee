@@ -5,6 +5,7 @@ import WhoopeeDataReducer from './WhoopeeDataReducer';
 import RandomLoaderReducer from './RandomLoaderReducer';
 import ModalReducer from './ModalReducer';
 import UserCreatedReducer from './UserCreatedReducer';
+import NetworkConnectionReducer from './NetworkConnectionReducer';
 
 export default combineReducers({
     AuthReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     WhoopeeDataReducer,
     RandomLoaderReducer,
     ModalReducer,
-    UserCreatedReducer
+    UserCreatedReducer,
+    NetworkConnectionReducer
 });

@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.core.files.base import ContentFile
-from django.contrib.auth import get_user_model  # getUserModel
 
 from rest_framework import status
 from rest_framework.response import Response
@@ -14,29 +13,26 @@ from datamuse import datamuse
 from bs4 import BeautifulSoup
 
 from .models import Category, Author, Quote, Hashtag, Analytic, User
-from .serializers import CategorySerializer, AnalyticSerializer
-
-# User = get_user_model()
+from .serializers import CategorySerializer, AnalyticSerializer, UserSerializer
 
 
 class UserCreate(views.APIView):
     def post(self, request, format=None):
-        print('request.data', request.data)
-        print('request.data', request.data.get('email'))
         user = User.objects.filter(email=request.data.get('email'))
         if not user.exists():
             userCreated = User.objects.create(first_name=request.data.get('first_name'), last_name=request.data.get('last_name'), email=request.data.get('email'), token=request.data.get('access_token'))
             return Response({'userId': userCreated.id}, status=status.HTTP_200_OK)
         else:
-            print('request.data.get',request.data.get('access_token'))
             user.update(token=request.data.get('access_token'))
         return Response({'userId': user.first().id}, status=status.HTTP_200_OK)
 
 
 class AzureAI:
     def __init__(self):
-        self.subscription_key = "b7e0e2904d294689af31d6dcca745cee"
-        self.vision_base_url = "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/"
+        self.subscription_key = "aad19fc3869c47b192392b69c78aedd6"  # from whoope01
+        # self.subscription_key = "b7e0e2904d294689af31d6dcca745cee" # from varunajmera07
+        # self.vision_base_url = "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/" # from varunajmera07
+        self.vision_base_url = "https://centralindia.api.cognitive.microsoft.com/vision/v2.0/"  # from whoope01
         self.params = {'visualFeatures': 'Categories,Tags,Description,Faces', 'details': 'Celebrities,Landmarks'}
 
     def objectdetection(self, image_path):
@@ -48,37 +44,38 @@ class AzureAI:
                    'Content-Type': 'application/octet-stream'}
         AzureRequest = requests.post(analyze_url, headers=headers, params=self.params, data=image_data)
 
-        if json.loads(AzureRequest.text).get("statusCode") != 200:
+        if AzureRequest.status_code != 200:
             return {"key": "error", "data": json.loads(AzureRequest.text).get("message")}
 
         response = None
         response = AzureRequest.json()
+
         data = {}
         if response is not None:
             if "categories" in response:
-                data['categories'] = response.get("categories")[0]["name"]
+                data["categories"] = response.get("categories")[0]["name"]
                 if "detail" in response.get('categories')[0]:
                     if "celebrities" in response.get("categories")[0]["detail"]:
-                        data['celebrities'] = list(x['name'] for x in response.get("categories")[0]["detail"]["celebrities"])
+                        data["celebrities"] = list(x["name"] for x in response.get("categories")[0]["detail"]["celebrities"])
                     if "landmarks" in response.get("categories")[0]["detail"]:
-                        data['landmarks'] = list(x['name'] for x in response.get("categories")[0]["detail"]["landmarks"])
+                        data["landmarks"] = list(x["name"] for x in response.get("categories")[0]["detail"]["landmarks"])
             if "tags" in response:
-                data['tags'] = list(x['name'] for x in response.get("tags"))
+                data["tags"] = list(x["name"] for x in response.get("tags"))
 
             if "tags" in data:
                 if len(data.get("tags")) > 0:
-                    data['other_tags'] = response.get("description")["tags"]
+                    data["other_tags"] = response.get("description")["tags"]
                 else:
-                    data['tags'] = response.get("description")["tags"]
+                    data["tags"] = response.get("description")["tags"]
             else:
-                data['tags'] = response.get("description")["tags"]
+                data["tags"] = response.get("description")["tags"]
 
             if "captions" in response.get("description"):
                 if len(response.get("description")['captions']) > 0:
-                    data['captions'] = response.get("description")["captions"][0]["text"]
+                    data["captions"] = response.get("description")["captions"][0]["text"]
 
             if "faces" in response:
-                data['faces'] = list({x['gender']: x['age']} for x in response.get("faces"))
+                data["faces"] = list({x["gender"]: x["age"]} for x in response.get("faces"))
             return {"key": "success", "data": data}
 
 
@@ -95,19 +92,20 @@ class AnalyzeImage(views.APIView):
 
         queryAnalytic = Analytic.objects.create(**files)
         get_QueryAnalytic = Analytic.objects.get(id=queryAnalytic.id)
+
         azure = AzureAI()
         azureResponse = azure.objectdetection(settings.BASE_DIR + get_QueryAnalytic.image.url)
 
         if azureResponse.get('key') == "error":
-            return Response({'error': azureResponse.get('data')}, status=status.HTTP_200_OK)
+            return Response({"error": azureResponse.get('data')}, status=status.HTTP_400_BAD_REQUEST)
 
-        Analytic.objects.filter(id=queryAnalytic.id).update(data=azureResponse)
+        Analytic.objects.filter(id=queryAnalytic.id).update(data=json.dumps(azureResponse.get("data")))
 
         mainify = WhoopeeMainify
-        for tag in azureResponse.get('tags'):
+        for tag in azureResponse.get('data')["tags"]:
             mainify.whoopee(tag)
 
-        return Response({'id': queryAnalytic.id}, status=status.HTTP_200_OK)
+        return Response({"id": queryAnalytic.id}, status=status.HTTP_200_OK)
 
 
 class GetWhoopeeData(generics.ListAPIView):
@@ -116,18 +114,41 @@ class GetWhoopeeData(generics.ListAPIView):
     serializer_class = CategorySerializer
 
     def get_queryset(self, key):
-        return Category.objects.get(name=key)
+        return Category.objects.filter(name=key)
 
     def list(self, request, pk=None):
         # Note the use of `get_queryset()` instead of `self.queryset`
-        data = {}
-        queryAnalytic = Analytic.objects.filter(id=pk).first()
-        for key in eval(queryAnalytic.data).get('tags'):
-            queryset = self.get_queryset(key)
-            serializer = CategorySerializer(queryset)
-            data[key] = serializer.data
-        data['analysis'] = AnalyticSerializer(queryAnalytic).data
-        return Response(data, status=status.HTTP_200_OK)
+        whoopeedata = {}
+        queryAnalytic = Analytic.objects.filter(id=pk)
+        if queryAnalytic.exists():
+            if queryAnalytic.first().data != None:
+                for key in eval(queryAnalytic.first().data).get('tags'):
+                    queryset = self.get_queryset(key)
+                    if queryset.exists():
+                        serializer = CategorySerializer(queryset.first())
+                        whoopeedata[key] = serializer.data
+                whoopeedata['analysis'] = AnalyticSerializer(queryAnalytic.first()).data
+                return Response(whoopeedata, status=status.HTTP_200_OK)
+            return Response({"error": "Analysis data doesn't exist."}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"error": "Record doesn't exist."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetUserWiseData(generics.ListAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get_queryset(self, pk):
+        return User.objects.get(id=pk)
+
+    def list(self, request, pk=None):
+        # Note the use of `get_queryset()` instead of `self.queryset`
+        userExist = User.objects.filter(id=pk)
+        if userExist.exists():
+            queryset = self.get_queryset(pk)
+            serializer = UserSerializer(queryset)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"error": "User doesn't exist."}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class WhoopeeCategory:

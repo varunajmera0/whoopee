@@ -2,4 +2,6 @@ python-datamuse
 beautifulsoup4
 djangorestframework
 pillow
-brainyquote
+psycopg2-binary
+gunicorn
+django

@@ -115,6 +115,8 @@ class WhoopeeSlider extends Component {
     // https://stackoverflow.com/questions/35471326/react-native-flexbox-align
     // https://facebook.github.io/react-native/docs/flexbox
     dataRender = () => {
+        console.log('this.state.quote',this.state.quotes)
+        let hashtagJoin = (this.state.quote) ? ((typeof(this.state.quote[0].text_hashtag) !== 'undefined' && this.state.quote[0].text_hashtag.length > 0) ? '#' + this.state.quote[0].text_hashtag.map(x => x + ' ').join('#') + '#whoopee' : '#whoopee') : null;
         return (
             (this.props.ButtonStatus === 'quote') ?
                 (!this.state.existCategory ?
@@ -126,7 +128,14 @@ class WhoopeeSlider extends Component {
                             }
                         </Carousel>
                         :
-                        null
+                        <View style={{justifyContent: 'center', alignItems: 'center', backgroundColor: '#35a79c', height: Dimensions.get('window').height/3.3}}>
+                            <LottieView
+                            style={{  height: Dimensions.get('window').height/3.3, width: Dimensions.get('window').width, justifyContent: 'center', alignItems: 'center', }}
+                            source={require('../lottiesFiles/crying.json')}
+                            autoPlay
+                            loop
+                            />
+                        </View>
                     )
                     :
                     <View style={{justifyContent: 'center', alignItems: 'center', backgroundColor: '#35a79c', height: Dimensions.get('window').height/3.3}}>
@@ -145,7 +154,7 @@ class WhoopeeSlider extends Component {
                             <View style={{flexDirection: 'row',}}>
                                 <Right>
                                     <Icon type='MaterialIcons' name='content-copy'
-                                          onPress={async () => {await Clipboard.setString('#' + this.state.quote[0].text_hashtag.map(x => x + ' ').join('#') + '#whoopee');
+                                          onPress={async () => {await Clipboard.setString(hashtagJoin);
                                               ToastAndroid.showWithGravityAndOffset(
                                                   'Hashtag copied successfully!',
                                                   ToastAndroid.LONG,
@@ -159,6 +168,8 @@ class WhoopeeSlider extends Component {
                             </View>
                             <View style={{flex:1, flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center',}}>
                                 {
+                                    this.state.quote !== null ?
+                                    ((typeof(this.state.quote[0].text_hashtag) !== 'undefined' && this.state.quote[0].text_hashtag.length > 0) ? 
                                     this.state.quote[0].text_hashtag.map((val,keys) =>{
                                         if(val !== ""){
                                             return  <View key={keys} style={{flexDirection: 'row', borderRadius: 20, borderWidth: 2, margin: 5, paddingRight: 5, paddingLeft: 5}}>
@@ -166,6 +177,28 @@ class WhoopeeSlider extends Component {
                                                     </View>
                                         }
                                     })
+                                    :
+                                    <View style={{justifyContent: 'center', alignItems: 'center', height: Dimensions.get('window').height/3.3, backgroundColor: '#35a79c'}}>
+                                        <LottieView style={{height: Dimensions.get('window').height/3.3,
+                                                            width: Dimensions.get('window').width,
+                                                            justifyContent: 'center',
+                                                            alignItems: 'center'}}
+                                        source={require('../lottiesFiles/crying.json')}
+                                        autoPlay
+                                        loop
+                                        />
+                                    </View>)
+                                    :
+                                    <View style={{justifyContent: 'center', alignItems: 'center', height: Dimensions.get('window').height/3.3, backgroundColor: '#35a79c'}}>
+                                        <LottieView style={{height: Dimensions.get('window').height/3.3,
+                                                            width: Dimensions.get('window').width,
+                                                            justifyContent: 'center',
+                                                            alignItems: 'center'}}
+                                        source={require('../lottiesFiles/crying.json')}
+                                        autoPlay
+                                        loop
+                                        />
+                                    </View>
                                 }
                             </View>
                         </ScrollView>
@@ -195,7 +228,6 @@ class WhoopeeSlider extends Component {
             <View style={{backgroundColor: '#35a79c', width: null, justifyContent: 'center', alignItems: 'center'}}>
                 <LottieView style={{ height: Dimensions.get('window').height/3.3, justifyContent: 'center', alignItems: 'center'}}
                     source={random_loader_arr[this.props.RandomLoading.randNumber]}
-                    progress={this.state.progress}
                     autoPlay
                     loop
                 />
@@ -211,11 +243,12 @@ class WhoopeeSlider extends Component {
                         {this.props.QuoteHashtagData != null ? this.props.QuoteHashtagData.map((k, val) => {
                             return Object.keys(k).map((keys, index) => {
                                 return (
+                                    // this.state.index === index && keys!=='analysis' bcoz if any key is not there then boundary will come
                                     <View style={[styles.buttonContainer, {}]} key={keys}>
                                         <Button transparent style={{
-                                            borderRadius: (this.state.index === index) ? 30 : null,
-                                            borderWidth: (this.state.index === index) ? 1 : null,
-                                            borderColor: (this.state.index === index) ? 'black' : '',
+                                            borderRadius: (this.state.index === index && keys!=='analysis') ? 30 : null,
+                                            borderWidth: (this.state.index === index && keys!=='analysis') ? 1 : null,
+                                            borderColor: (this.state.index === index && keys!=='analysis') ? 'black' : '',
                                         }} onPress={() => this.keySelected(this.props.QuoteHashtagData[0], keys, index)}>
                                             <Text style={{
                                                 color: 'black',
@@ -243,7 +276,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-    LottieAnimation: (vals) => dispatch(LoadingLottieAction(vals)),
+    LottieAnimation: vals => dispatch(LoadingLottieAction(vals)),
     Whoopee_Loader: randomNum => dispatch(RandomLoaderAction(randomNum)),
     Whoopee_Modal: modalStatus => dispatch(ModalAction(modalStatus))
 });

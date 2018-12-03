@@ -5,4 +5,4 @@ export const ModalAction = (modalStatus) => {
         type: MODAL,
         modalStatus
     };
-}
+};

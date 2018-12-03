@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import {
     View,
     StyleSheet,
-    ScrollView,
-    Animated,
     Image,
     Dimensions,
     Modal,
-    Alert,
     TouchableWithoutFeedback,
-    ImageBackground
+    ToastAndroid
 } from 'react-native';
 import {
     Button,
@@ -24,12 +21,16 @@ import LottieView from 'lottie-react-native';
 import ImagePicker from "react-native-image-picker";
 
 import WhoopeeSlider from './WhoopeeSlider';
+import OfflineNotice from './OfflineNotice';
 
 import {FacebookManagerAction} from "../redux/actions/AuthAction";
 import {LoadingLottieAction} from "../redux/actions/LodingAction";
 import {WhoopeeDataAction} from "../redux/actions/WhoopeeDataAction";
 import {RandomLoaderAction} from "../redux/actions/RandomLoaderAction";
 import {ModalAction} from "../redux/actions/ModalAction";
+
+const Whoopee_URL = 'http://1precent.com';
+// const Whoopee_URL = 'http://10.0.2.2:8003';
 
 // https://digitalsynopsis.com/design/beautiful-color-palettes-combinations-schemes/
 class Home extends Component {
@@ -38,11 +39,11 @@ class Home extends Component {
         this.state = {
             modalVisible: false,
             activePage: 1,
-            progress: new Animated.Value(0),
             avatarSource: null,
             name: null,
             type: null,
             url: null,
+            fileSize:  null,
             buttonStatus: 'quote',
             lottieAnimation: false,
             clickSnap: false,
@@ -63,7 +64,8 @@ class Home extends Component {
             maxHeight: 500,
             storageOptions: {
                 skipBackup: true
-            }
+            },
+            mediaType: 'photo'
         };
 
         ImagePicker.showImagePicker(options, (response) => {
@@ -81,14 +83,18 @@ class Home extends Component {
                 // You can also display the image using data:
                 // let source = { uri: 'data:image/jpeg;base64,' + response.data };
                 let source = { uri: response.uri };
+                // fileSize: 3928935,
+                // check file size
+                // https://stackoverflow.com/a/43247947/7374090
                 this.setState({
                     avatarSource: source,
                     name: response.fileName,
                     type: response.type,
                     url : response.data,
+                    fileSize: response.fileSize,
                     clickSnap: false
                 });
-        }
+            }
         });
     };
 
@@ -100,55 +106,96 @@ class Home extends Component {
         this.setState({buttonStatus: text, activePage, lottieAnimation: true})
     };
 
-    onUpload = () => () => {
-        console.log(this.props.UserCreated)
-        const data = new FormData();
-        // data.append('photo', {
-        //   uri: this.state.url,
-        //   type: this.state.type, // or photo.type
-        //   name: this.state.name
-        // });
-        data.append('photo', this.state.url)
-        data.append('photo_name', this.state.name);
-        data.append('photo_type', this.state.type);
-        data.append('user_id', this.props.UserCreated);
+    callUpload = () => () => {
+        if (this.props.NetworkInfo) {
+            this.onUpload()
+        }else{
+            ToastAndroid.showWithGravityAndOffset(
+                'No Internet Connection',
+                ToastAndroid.LONG,
+                ToastAndroid.BOTTOM,
+                50,
+                50,
+            );
+        }
+    };
 
-        //set timout is there cant set state clicksnap
-        this.setState({modalOpen: true});
-        this.props.Whoopee_Modal(true); //dispatch Redux
+    onUpload = () => {
+        if ((this.state.fileSize/1048576).toFixed(2) <= 3.90) {
+            const data = new FormData();
+            // data.append('photo', {
+            //   uri: this.state.url,
+            //   type: this.state.type, // or photo.type
+            //   name: this.state.name
+            // });
+            data.append('photo', this.state.url)
+            data.append('photo_name', this.state.name);
+            data.append('photo_type', this.state.type);
+            data.append('user_id', this.props.UserCreated);
 
-        fetch("http://10.0.2.2:8003/api/v1/analyzeImage/", {
-          method: 'POST',
-          headers: {
-            "Accept": "application/json",
-            "Content-Type": "multipart/form-data"
-          },
-          body: data
-        }).then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            this.props.Whoopee_Modal(false); //dispatch Redux
             //set timout is there cant set state clicksnap
-            this.setState({modalOpen: false});
-            return res.text().then(text => {throw (res.status + ': '+ JSON.parse(text).error)});
-        }).then(r => {
-                fetch(`http://10.0.2.2:8003/api/v1/getWhoopeeData/78/`)
-                .then(res => {
-                    if (res.ok){
-                        return res.json()
-                    }
-                    return res.text().then(text => {throw (res.status + ': '+ JSON.parse(text).error)});
-                })
-                .then(r => {
-                    this.setState({clickSnap: true, modalOpen: false});
-                    this.props.Whoopee_Data([r]);
-                })
-                .catch(err => Alert.alert(err));
-        }).catch(err => {
-            this.props.Whoopee_Modal(false);  // typeError : Network request failed || other type of errors
-            Alert.alert(err);
-        });
+            this.setState({modalOpen: true});
+            this.props.Whoopee_Modal(true); //dispatch Redux
+
+            fetch(Whoopee_URL + "/api/v1/analyzeImage/", {
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "multipart/form-data"
+                },
+                body: data
+            }).then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                this.props.Whoopee_Modal(false); //dispatch Redux
+                //set timout is there can't set state clicksnap
+                this.setState({modalOpen: false});
+                return res.text().then(text => {
+                    try {
+                        // here we check json is not an object
+                        throw typeof text === 'object' ? (res.status + ': '+ JSON.parse(text).error) : (res.status + ': '+ text);
+                      } catch(error) {
+                         // this drives you the Promise catch
+                        throw error;
+                      }  
+                    // throw (res.status + ': ' + JSON.parse(text).error)
+                });
+            }).then(r => {
+                fetch(`${Whoopee_URL}/api/v1/getWhoopeeData/${r.id}/`)
+                    .then(res => {
+                        if (res.ok) {
+                            return res.json()
+                        }
+                        return res.text().then(text => {
+                            try {
+                                // here we check json is not an object
+                                throw typeof text === 'object' ? (res.status + ': '+ JSON.parse(text).error) : (res.status + ': '+ text);
+                              } catch(error) {
+                                 // this drives you the Promise catch
+                                throw error;
+                              }  
+                            // throw (res.status + ': ' + JSON.parse(text).error)
+                        });
+                    })
+                    .then(r => {
+                        this.setState({clickSnap: true, modalOpen: false});
+                        this.props.Whoopee_Modal(false);
+                        this.props.Whoopee_Data([r]);
+                    })
+                    .catch(err => {
+                        this.setState({modalOpen: false});
+                        this.props.Whoopee_Modal(false);
+                        alert(err)
+                    });
+            }).catch(err => {
+                this.setState({modalOpen: false});
+                this.props.Whoopee_Modal(false);  // typeError : Network request failed || other type of errors
+                alert(err);
+            });
+        }else{
+            alert("File size should not be more than 3.9 MB.")
+        }
     };
 
     segement = () => {
@@ -186,16 +233,53 @@ class Home extends Component {
             </View>
         );
     };
-    
+
+    historyWhoopee(id) {
+        this.props.Whoopee_Modal(true); //dispatch Redux
+        this.setState({modalOpen: true});
+        fetch(`${Whoopee_URL}/api/v1/getWhoopeeData/${id}/`)
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return res.text().then(text => {
+                    try {
+                        // here we check json is not an object
+                        throw typeof text === 'object' ? (res.status + ': '+ JSON.parse(text).error) : (res.status + ': '+ text);
+                      } catch(error) {
+                         // this drives you the Promise catch
+                        throw error;
+                      }  
+                    // throw (res.status + ': ' + JSON.parse(text).error)
+                });
+            })
+            .then(r => {
+                this.setState({clickSnap: true, modalOpen: false, avatarSource: {uri: `${Whoopee_URL}/media/${r.analysis.image}`}});
+                this.props.Whoopee_Data([r]);
+                this.props.Whoopee_Modal(false);
+            })
+            .catch(err => {
+                this.setState({modalOpen: false});
+                this.props.Whoopee_Modal(false);
+                alert(err)
+            });
+    };
+
     componentDidMount() {
         if (this.props.QuoteHashtagData != null){
             this.props.Whoopee_Modal(true); //dispatch Redux
-            this.setState({clickSnap: true, avatarSource: {uri: `http://10.0.2.2:8003${this.props.QuoteHashtagData[0].analysis.image}`}});
+            this.setState({clickSnap: true, avatarSource: {uri: `${Whoopee_URL}/media/${this.props.QuoteHashtagData[0].analysis.image}`}});
         }else{
             this.setState({clickSnap: false, avatarSource: null})
         }
         // button for camera on header
         this.props.navigation.setParams({ handleCamera: () => this.selectPhotoTapped() })
+    }
+
+    componentDidUpdate(prevProps){
+        if (this.props.navigation.getParam('id') !== prevProps.navigation.getParam('id')){
+            this.historyWhoopee(this.props.navigation.getParam('id'))
+        }
     }
 
     static navigationOptions = ({ navigation }) => {
@@ -208,9 +292,14 @@ class Home extends Component {
             headerTintColor: 'black',
             headerTitleStyle: {
                 fontFamily: 'Comfortaa-Bold',
+                marginLeft: -10
             },
-            headerRight:
-                <Icon name='camera' type='Feather' onPress={() => state.params.handleCamera()} style={{paddingRight: 10, fontSize: 30}} />
+            headerLeft: <Icon name='camera' type='Feather' onPress={() => state.params.handleCamera()} style={{fontSize: 30, paddingLeft: 9}} /> ,
+            headerRight: (
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('History') }>
+                    <Icon name="history" type="FontAwesome" size={20} style={{paddingRight: 15}}/>
+                </TouchableWithoutFeedback>
+            ),
         }
     };
 
@@ -220,7 +309,7 @@ class Home extends Component {
             transparent={true}
             visible={this.props.WhoopeeModal}
             onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
+              alert('Modal has been closed.');
             }}>
                 <View style={{backgroundColor: '#FCFCFC', width: '100%', height: '100%'}}>
                     <View style={{justifyContent: 'center', alignContent: 'center', flexDirection: 'row', marginTop: Dimensions.get('window').height/5 }}>
@@ -237,8 +326,8 @@ class Home extends Component {
     };
 
     back = () => () => {
-        this.setState({clickSnap: true,});
-    }
+        this.setState({clickSnap: true, avatarSource: {uri: `${Whoopee_URL}/media/${this.props.QuoteHashtagData[0].analysis.image}`}});
+    };
 
     withoutImage = () => {
         //set timout is here cant set state clicksnap
@@ -250,14 +339,14 @@ class Home extends Component {
             <View style={{flexDirection: "row", justifyContent: "center", height: Dimensions.get('window').height/2.20, width: Dimensions.get('window').width, backgroundColor: '#35a79c', paddingBottom: 200}}>
                 {
                     (this.state.url !== null) ?
-                        <TouchableWithoutFeedback onPress={this.onUpload()}>
+                        <TouchableWithoutFeedback onPress={this.callUpload()}>
                             <View style={{marginTop: 70, marginRight: 10, borderRadius: 30, borderWidth: 3, borderColor: 'white', width: 120, height: 45, flexDirection: "row", justifyContent: "center", backgroundColor: 'white'}}>
                                 <Text style={{fontSize: 22, fontFamily: 'Comfortaa-Bold', color: 'black', textAlign: 'center'}}>Send</Text>
                                 <Icon type='FontAwesome' name='send-o' style={{justifyContent: "center", alignItems: 'center', paddingTop: 8, fontSize: 22, paddingLeft: 5}}/>
                             </View>
                         </TouchableWithoutFeedback>
                         :
-                        <Image source={require('../lottiesFiles/image.png')} style={{flexDirection: "column", justifyContent: "center", alignItems: 'center', height: Dimensions.get('window').height/2.2, width: Dimensions.get('window').width, backgroundColor: '#35a79c', paddingBottom: 200}}/>
+                        <Image source={require('../lottiesFiles/capture_image.png')} style={{flexDirection: "column", justifyContent: "center", alignItems: 'center', height: Dimensions.get('window').height/2.2, width: Dimensions.get('window').width, backgroundColor: '#35a79c', paddingBottom: 200}}/>
                 }
                 {
                     (this.props.QuoteHashtagData !== null) ?
@@ -270,6 +359,7 @@ class Home extends Component {
                         :
                         null
                 }
+
             </View> 
         );
     };
@@ -277,6 +367,7 @@ class Home extends Component {
     render() {
         return (
             <View style={{height: Dimensions.get('window').height, backgroundColor: 'transparent'}}>
+
                 <View style={{height: Dimensions.get('window').height*0.80}}>
                     {this.state.clickSnap ? this.segement() : null}
                     {this.camerRender()}
@@ -298,6 +389,7 @@ class Home extends Component {
                             paddingBottom: 200
                         }}/>
                     }
+                    {!this.state.clickSnap ? <OfflineNotice /> : null }
                 </View>
                 <View style={{ backgroundColor: '#35a79c', height: Dimensions.get('window').height*0.20}}>
                     <AdMobBanner adSize="smartBannerPortrait" adUnitID="ca-app-pub-4132894286898630/3108734750" didFailToReceiveAdWithError={this.bannerError} />
@@ -313,6 +405,7 @@ const mapStateToProps = (state, props) => ({
     QuoteHashtagData: state.WhoopeeDataReducer.data,
     WhoopeeModal: state.ModalReducer.modalStatus,
     UserCreated: state.UserCreatedReducer.userId,
+    NetworkInfo: state.NetworkConnectionReducer.networkStatus
   });
   
 const mapDispatchToProps = (dispatch, props) => ({
@@ -326,13 +419,8 @@ const mapDispatchToProps = (dispatch, props) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
-    avatarContainer: {
-        borderColor: '#9B9B9B',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     avatar: {
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height/3.1
+        height: Dimensions.get('window').height / 3.1,
     }
 });

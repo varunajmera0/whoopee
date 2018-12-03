@@ -6,12 +6,17 @@ import {Provider, connect} from 'react-redux';
 import {store, persistor} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react'
 
-import {createStackNavigator, createSwitchNavigator} from 'react-navigation';
+import {
+    createStackNavigator,
+    createSwitchNavigator
+} from 'react-navigation';
 
 import App from './App';
 import Home from './src/components/Home';
+import History from "./src/components/History";
 
-const AppStack = createStackNavigator({Home: Home});
+// https://shift.infinite.red/react-navigation-drawer-tutorial-a802fc3ee6dc
+const AppStack = createStackNavigator({Home: Home, History: History});
 const AuthStack = createStackNavigator({SignIn: App});
 
 const WhoopeeRoutes = createSwitchNavigator(

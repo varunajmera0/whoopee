@@ -3,6 +3,8 @@ import {LoginManager, AccessToken, GraphRequest, GraphRequestManager} from 'reac
 import {ModalAction} from "./ModalAction";
 import {ToastAndroid} from "react-native";
 
+const Whoopee_URL = 'http://1precent.com';
+
 export const AuthInfoAction = (first_name, last_name, email, accessToken) => {
     return {
         type: LOGIN,
@@ -11,7 +13,7 @@ export const AuthInfoAction = (first_name, last_name, email, accessToken) => {
         email,
         accessToken
     };
-}
+};
 
 export const UserCreatedAction = (userId) => {
     return {
@@ -21,8 +23,7 @@ export const UserCreatedAction = (userId) => {
 };
 
 userCreate = (first_name, last_name, email, access_token, dispatch) => {
-    console.log('called')
-    fetch("http://10.0.2.2:8003/api/v1/userCreate/", {
+    fetch(`${Whoopee_URL}/api/v1/userCreate/`, {
         method: 'POST',
         headers: {
             "Accept": "application/json",
@@ -38,9 +39,17 @@ userCreate = (first_name, last_name, email, access_token, dispatch) => {
         if (res.ok) {
             return res.json();
         }
-        return res.text().then(text => {throw (res.status + ': '+ JSON.parse(text).error)});
+        return res.text().then(text => {
+            try {
+                // here we check json is not an object
+                throw typeof text === 'object' ? (res.status + ': '+ JSON.parse(text).error) : (res.status + ': '+ text);
+              } catch(error) {
+                 // this drives you the Promise catch
+                throw error;
+              }  
+            // throw (res.status + ': '+ JSON.parse(text).error)
+        });
     }).then(r => {
-        console.log('r', r)
         dispatch(UserCreatedAction(r.userId))
     }).catch(err => {
         alert(err)
@@ -59,7 +68,6 @@ export const FacebookManagerAction = () => {
                         50,
                         50,
                     );
-                    // alert('Login cancelled');
                     dispatch(ModalAction(false));
                 } else {
                     AccessToken
@@ -75,10 +83,9 @@ export const FacebookManagerAction = () => {
                                         50,
                                         50,
                                     );
-                                    // alert('Error fetching data: ' + error.toString());
                                     dispatch(ModalAction(false));
                                 } else {
-                                    // dispatch(ModalAction(true));
+                                    console.log(result)
                                     this.userCreate(result.first_name, result.last_name, result.email, accessToken.toString(), dispatch);
                                     dispatch(AuthInfoAction(result.first_name, result.last_name, result.email, accessToken.toString()));
                                 }
@@ -107,8 +114,7 @@ export const FacebookManagerAction = () => {
                     50,
                     50,
                 );
-                // alert('Login fail with error: ' + error);
                 dispatch(ModalAction(false));
             });
     }
-}
+};

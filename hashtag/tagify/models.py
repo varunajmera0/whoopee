@@ -106,9 +106,8 @@ def path_and_rename(instance, filename):
 
 class Analytic(models.Model):
     user = models.ForeignKey(User, related_name='user_analytics', on_delete=models.CASCADE)
-    count = models.PositiveIntegerField(null=True, blank=True)
     data = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='varun', max_length=100)
+    image = models.ImageField(upload_to=path_and_rename, max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

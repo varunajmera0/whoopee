@@ -4,14 +4,12 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Alert,
     Dimensions,
     Modal,
     TouchableWithoutFeedback
 } from 'react-native';
 
 import LottieView from 'lottie-react-native';
-import {Button, Icon} from 'native-base';
 
 import {FacebookManagerAction} from './src/redux/actions/AuthAction';
 import {connect} from 'react-redux';
@@ -44,7 +42,7 @@ class App extends Component {
                    transparent={true}
                    visible={this.props.WhoopeeModal}
                    onRequestClose={() => {
-                       Alert.alert('Modal has been closed.');
+                       alert('Modal has been closed.');
                    }}>
                 <View style={{backgroundColor: '#FCFCFC', width: '100%', height: '100%'}}>
                     <View style={{justifyContent: 'center', alignContent: 'center', flexDirection: 'row', marginTop: Dimensions.get('window').height/5 }}>
@@ -89,26 +87,24 @@ class App extends Component {
                 <View style={{flexDirection: 'row', alignItems: "center", justifyContent: "center",}}>
                     <LottieView
                         style={{height: 200}}
-                        source={require('./src/lottiesFiles/lottie.json')}
+                        source={require('./src/lottiesFiles/whoopee.json')}
                         autoPlay
                         loop
                     />
 
                 </View>
                 {this.ModalShow()}
-                {/*<View style={{height: 100, backgroundColor: 'red',}}>*/}
-                    <TouchableWithoutFeedback onPress={() => this.Authentication()} style={{width: 350, alignItems: "center", justifyContent: "center", backgroundColor: 'red'}}>
-                        <View style={{flexDirection: 'row', backgroundColor: 'white', width: 320, borderRadius: 30}}>
-                            <LottieView
-                                style={{height: 45, marginLeft: 6}}
-                                source={require('./src/lottiesFiles/facebook_.json')}
-                                autoPlay
-                                loop
-                            />
-                            <Text style={{color: "black", fontFamily: 'Comfortaa-Bold', fontSize: 19, paddingTop: 5, marginLeft:10, textAlign: 'center', alignItems: "center", justifyContent: "center",}}>Continue with Facebook</Text>
-                        </View>
-                    </TouchableWithoutFeedback>
-                {/*</View>*/}
+                <TouchableWithoutFeedback onPress={() => this.Authentication()} style={{width: 350, alignItems: "center", justifyContent: "center", backgroundColor: 'red'}}>
+                    <View style={{flexDirection: 'row', backgroundColor: 'white', width: 320, borderRadius: 30}}>
+                        <LottieView
+                            style={{height: 45, marginLeft: 6}}
+                            source={require('./src/lottiesFiles/facebook_.json')}
+                            autoPlay
+                            loop
+                        />
+                        <Text style={{color: "black", fontFamily: 'Comfortaa-Bold', fontSize: 19, paddingTop: 5, marginLeft:10, textAlign: 'center', alignItems: "center", justifyContent: "center",}}>Continue with Facebook</Text>
+                    </View>
+                </TouchableWithoutFeedback>
             </View>
         );
     }
