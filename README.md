@@ -2,7 +2,7 @@
 
 This project is combination of django and react native.
 
-This project generates #hashtags and caption based on your image with help of Azure Computer Vision API.
+This project generates #hashtags and captions|quotes based on your image with help of Azure Computer Vision API.
 
 This project uses lottie-react-native which provided by Airbnb.
 ```
