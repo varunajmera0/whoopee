@@ -1,0 +1,1233 @@
+<!DOCTYPE HTML><html><head><title>Startups Club API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/raml2html/raml2html 7.1.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code, .modal-body pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
+
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
+
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          try {
+            if (history && history.replaceState) {
+                history.replaceState({}, '', '#');
+            }
+          } catch(e) {}
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h1 {
+        font-size: 1.3em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+      pre code {
+        overflow: auto;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      .items {
+        background: #f5f5f5;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+      }
+      .examples {
+        margin-left: 0.5em;
+      }
+      .resource-modal li > ul {
+        margin-bottom: 1em;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>Startups Club API documentation <small>version v1</small></h1><p>http://206.189.130.109:8000/api/{version}</p><ul><li><strong>version</strong>: <em>required (v1)</em></li></ul></div><div class="panel panel-default"><div class="panel-heading"><h3 id="payment" class="panel-title">/payment</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_payment_usersubscriptionlist_"><span class="parent">/payment</span>/usersubscriptionlist/</a> <span class="methods"><a href="#payment_usersubscriptionlist__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_payment_usersubscriptionlist_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>List of users(Applied subscription or not subscribed) (Website Link)</p></div><div class="list-group"><div onclick="window.location.href = '#payment_usersubscriptionlist__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get Users List</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_usersubscriptionlist__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/payment</span>/usersubscriptionlist/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get Users List</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_usersubscriptionlist__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_usersubscriptionlist__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+"id": 2,
+"first_name": "Varun",
+"last_name": "Ajmera",
+"email": "varunajmera@gmail.com",
+"mobile": "8104435075",
+"role": {
+    "id": 1,
+    "name": "regular"
+},
+"membership": [],
+"paymentsubscription": [],
+"paymentdetail": [],
+"subscription_active": "false"
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_payment_usersubscriptionlist___search__parameter_"><span class="parent">/payment/usersubscriptionlist/</span>/?search={parameter}</a> <span class="methods"><a href="#payment_usersubscriptionlist___search__parameter__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_payment_usersubscriptionlist___search__parameter_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Search user for subscription link</p></div><div class="list-group"><div onclick="window.location.href = '#payment_usersubscriptionlist___search__parameter__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Parameter Search via user email(email format) or mobile (integer)</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_usersubscriptionlist___search__parameter__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/payment/usersubscriptionlist/</span>/?search={parameter}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Parameter Search via user email(email format) or mobile (integer)</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_usersubscriptionlist___search__parameter__get_request" data-toggle="tab">Request</a></li><li><a href="#payment_usersubscriptionlist___search__parameter__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_usersubscriptionlist___search__parameter__get_request"><h3>URI Parameters</h3><ul><li><strong>parameter</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="payment_usersubscriptionlist___search__parameter__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "id": 2,
+  "first_name": "varun",
+  "last_name": "ajmera",
+  "email": "varunajmera@gmail.com",
+  "mobile": "8104435075",
+  "role": {
+      "id": 3,
+      "name": "pioneer_plus"
+  },
+  "membership": [
+      {
+          "id": 3,
+          "status": false,
+          "payment_method": null,
+          "pioneer_duration": null,
+          "membership_code": null,
+          "subscription_id": "sub_Auo2Z2r5a4XA3E",
+          "subscribed_date": null,
+          "expiry_date": null,
+          "payment_status": false,
+          "created_at": "2018-09-24T15:37:45.448876+05:30",
+          "updated_at": "2018-09-27T18:10:24.329115+05:30",
+          "user": 2
+      }
+  ],
+  "paymentsubscription": [],
+  "paymentdetail": [],
+  "subscription_active": "false"
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_payment_subscriptionlinkhistorycreate_"><span class="parent">/payment</span>/subscriptionlinkhistorycreate/</a> <span class="methods"><a href="#payment_subscriptionlinkhistorycreate__post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_payment_subscriptionlinkhistorycreate_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Creating subscription link history (Website Link)</p></div><div class="list-group"><div onclick="window.location.href = '#payment_subscriptionlinkhistorycreate__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Send Link</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_subscriptionlinkhistorycreate__post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/payment</span>/subscriptionlinkhistorycreate/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Send Link</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_subscriptionlinkhistorycreate__post_request" data-toggle="tab">Request</a></li><li><a href="#payment_subscriptionlinkhistorycreate__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_subscriptionlinkhistorycreate__post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>user</strong>: <em>required (integer)</em><p>User Id</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "user": 1
+}</code></pre></div></div><div class="tab-pane" id="payment_subscriptionlinkhistorycreate__post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>Created</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully created"
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_payment_sentsubscriptionlinkhistory_"><span class="parent">/payment</span>/sentsubscriptionlinkhistory/</a> <span class="methods"><a href="#payment_sentsubscriptionlinkhistory__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_payment_sentsubscriptionlinkhistory_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Sent Link to user for subscription (Website Link)</p></div><div class="list-group"><div onclick="window.location.href = '#payment_sentsubscriptionlinkhistory__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Sent Link to user</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_sentsubscriptionlinkhistory__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/payment</span>/sentsubscriptionlinkhistory/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Sent Link to user</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_sentsubscriptionlinkhistory__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_sentsubscriptionlinkhistory__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+          "id": 1,
+          "user": {
+              "id": 1,
+              "first_name": "Varun",
+              "last_name": "Ajmera",
+              "email": "varunajmera0@gmail.com",
+              "mobile": "97020184121",
+              "role": {
+                  "id": 3,
+                  "name": "pioneer_plus"
+              }
+          },
+          "status": false,
+          "expiry_date": null,
+          "email_status": false,
+          "mobile_status": false,
+          "created_at": "2018-09-20T12:10:43.777984+05:30",
+          "updated_at": "2018-09-20T12:10:43.778040+05:30"
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_payment_sentsubscriptionlinkhistory___search__parameter_"><span class="parent">/payment/sentsubscriptionlinkhistory/</span>/?search={parameter}</a> <span class="methods"><a href="#payment_sentsubscriptionlinkhistory___search__parameter__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_payment_sentsubscriptionlinkhistory___search__parameter_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Search sent member subscription link history</p></div><div class="list-group"><div onclick="window.location.href = '#payment_sentsubscriptionlinkhistory___search__parameter__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Parameter Search via user email(email format) or mobile (integer)</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_sentsubscriptionlinkhistory___search__parameter__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/payment/sentsubscriptionlinkhistory/</span>/?search={parameter}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Parameter Search via user email(email format) or mobile (integer)</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_sentsubscriptionlinkhistory___search__parameter__get_request" data-toggle="tab">Request</a></li><li><a href="#payment_sentsubscriptionlinkhistory___search__parameter__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_sentsubscriptionlinkhistory___search__parameter__get_request"><h3>URI Parameters</h3><ul><li><strong>parameter</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="payment_sentsubscriptionlinkhistory___search__parameter__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+          "id": 1,
+          "user": {
+              "id": 1,
+              "first_name": "Varun",
+              "last_name": "Ajmera",
+              "email": "varunajmera0@gmail.com",
+              "mobile": "97020184121",
+              "role": {
+                  "id": 4,
+                  "name": "pioneer_gold"
+              }
+          },
+          "status": false,
+          "expiry_date": null,
+          "email_status": false,
+          "mobile_status": false,
+          "created_at": "2018-09-20T12:10:43.777984+05:30",
+          "updated_at": "2018-09-20T12:10:43.778040+05:30"
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_payment_newpioneersubscriptionhistory_"><span class="parent">/payment</span>/newpioneersubscriptionhistory/</a> <span class="methods"><a href="#payment_newpioneersubscriptionhistory__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_payment_newpioneersubscriptionhistory_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>New user who applied for subscription</p></div><div class="list-group"><div onclick="window.location.href = '#payment_newpioneersubscriptionhistory__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>New pioneer user for subscription</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_newpioneersubscriptionhistory__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/payment</span>/newpioneersubscriptionhistory/</h4></div><div class="modal-body"><div class="alert alert-info"><p>New pioneer user for subscription</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_newpioneersubscriptionhistory__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_newpioneersubscriptionhistory__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+ "next": null,
+ "previous": null,
+ "results": [
+     {
+       "id": 1,
+       "user": {
+           "id": 1,
+           "first_name": "Varun",
+           "last_name": "Ajmera",
+           "email": "varunajmera0@gmail.com",
+           "mobile": "97020184121",
+           "role": {
+               "id": 3,
+               "name": "pioneer_plus"
+           },
+           "membership": [
+               {
+                   "id": 1,
+                   "status": false,
+                   "payment_method": "website",
+                   "pioneer_duration": "monthly",
+                   "membership_code": "sa",
+                   "subscription_id": "sub_Auo2Z2r5a4XA3E",
+                   "subscribed_date": "2018-09-20",
+                   "expiry_date": "2018-11-20",
+                   "payment_status": true,
+                   "created_at": "2018-09-20T12:36:14.625554+05:30",
+                   "updated_at": "2018-09-20T12:36:14.625596+05:30",
+                   "user": 1
+               }
+           ]
+         },
+         "status": false,
+         "subscription_id": null,
+         "plan_id": null,
+         "pay_subscription_status": null,
+         "pioneer_duration": null,
+         "pioneer_role": null,
+         "amount": null,
+         "paid_count": null,
+         "created_for": null,
+         "upgrade_subscription": null,
+         "created_at": "2018-09-20T12:37:53.874454+05:30",
+         "updated_at": "2018-09-20T12:37:53.874511+05:30"
+    }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_payment_renewalpioneersubscriptionhistory_"><span class="parent">/payment</span>/renewalpioneersubscriptionhistory/</a> <span class="methods"><a href="#payment_renewalpioneersubscriptionhistory__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_payment_renewalpioneersubscriptionhistory_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Renewal user who applied for subscription</p></div><div class="list-group"><div onclick="window.location.href = '#payment_renewalpioneersubscriptionhistory__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Renewal pioneer user for subscription</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_renewalpioneersubscriptionhistory__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/payment</span>/renewalpioneersubscriptionhistory/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Renewal pioneer user for subscription</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_renewalpioneersubscriptionhistory__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_renewalpioneersubscriptionhistory__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+ "next": null,
+ "previous": null,
+ "results": [
+     {
+       "id": 1,
+       "user": {
+           "id": 1,
+           "first_name": "Varun",
+           "last_name": "Ajmera",
+           "email": "varunajmera0@gmail.com",
+           "mobile": "97020184121",
+           "role": {
+               "id": 3,
+               "name": "pioneer_plus"
+           },
+           "membership": [
+               {
+                   "id": 1,
+                   "status": false,
+                   "payment_method": "website",
+                   "pioneer_duration": "monthly",
+                   "membership_code": "sa",
+                   "subscription_id": "sub_Auo2Z2r5a4XA3E",
+                   "subscribed_date": "2018-09-20",
+                   "expiry_date": "2018-11-20",
+                   "payment_status": true,
+                   "created_at": "2018-09-20T12:36:14.625554+05:30",
+                   "updated_at": "2018-09-20T12:36:14.625596+05:30",
+                   "user": 1
+               }
+           ]
+         },
+         "status": false,
+         "subscription_id": null,
+         "plan_id": null,
+         "pay_subscription_status": null,
+         "pioneer_duration": null,
+         "pioneer_role": null,
+         "amount": null,
+         "paid_count": null,
+         "created_for": null,
+         "upgrade_subscription": null,
+         "created_at": "2018-09-20T12:37:53.874454+05:30",
+         "updated_at": "2018-09-20T12:37:53.874511+05:30"
+    }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_payment_paymentdetail"><span class="parent">/payment</span>/paymentdetail</a> <span class="methods"><a href="#payment_paymentdetail_post"><span class="badge badge_post">post</span></a> <a href="#payment_paymentdetail_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_payment_paymentdetail" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>All user payment details</p></div><div class="list-group"><div onclick="window.location.href = '#payment_paymentdetail_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Payment details</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#payment_paymentdetail_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Fetch payment detail</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_paymentdetail_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/payment</span>/paymentdetail</h4></div><div class="modal-body"><div class="alert alert-info"><p>Payment details</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_paymentdetail_post_request" data-toggle="tab">Request</a></li><li><a href="#payment_paymentdetail_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_paymentdetail_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>user</strong>: <em>required (integer)</em><p>User Id</p></li><li><strong>p1</strong>: <em>required (date-only)</em><p>Payment 1</p></li><li><strong>p2</strong>: <em>(date-only)</em><p>Payment 2</p></li><li><strong>role</strong>: <em>required (integer)</em><p>Role Id</p></li><li><strong>payment_method</strong>: <em>required (string - default: website)</em><p>Payment Method (website, link, cash)</p></li><li><strong>duration</strong>: <em>required (string - default: monthly)</em><p>Duration (monthly, yearly)</p></li><li><strong>maintain_status</strong>: <em>required (string)</em><p>Status (continue, completed)</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "user": 1,
+  "p1": "2018-09-10",
+  "p2": "2018-10-10",
+  "role": 2,
+  "payment_method": "website",
+  "duration": "monthly",
+  "maintain_status": "continue"
+}</code></pre></div></div><div class="tab-pane" id="payment_paymentdetail_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>Created</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully created"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_paymentdetail_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/payment</span>/paymentdetail</h4></div><div class="modal-body"><div class="alert alert-info"><p>Fetch payment detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_paymentdetail_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_paymentdetail_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+          "id": 1,
+          "status": false,
+          "p1": "2018-09-20",
+          "p2": "2018-10-20",
+          "p3": null,
+          "p4": null,
+          "p5": null,
+          "p6": null,
+          "p7": null,
+          "p8": null,
+          "p9": null,
+          "p10": null,
+          "p11": null,
+          "p12": null,
+          "duration": "monthly",
+          "maintain_status": "continue",
+          "created_at": "2018-09-20T12:37:53.874454+05:30",
+          "updated_at": "2018-09-20T12:37:53.874511+05:30",
+          "user": 1
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_payment_paymentdetail__id__"><span class="parent">/payment/paymentdetail</span>/{id}/</a> <span class="methods"><a href="#payment_paymentdetail__id___put"><span class="badge badge_put">put</span></a> <a href="#payment_paymentdetail__id___get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_payment_paymentdetail__id__" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>id (Integer) of payment detail,</p></div><div class="list-group"><div onclick="window.location.href = '#payment_paymentdetail__id___put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Update payment detail</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#payment_paymentdetail__id___get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Particular payment detail</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_paymentdetail__id___put"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/payment/paymentdetail</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update payment detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_paymentdetail__id___put_request" data-toggle="tab">Request</a></li><li><a href="#payment_paymentdetail__id___put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_paymentdetail__id___put_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>user</strong>: <em>required (integer)</em><p>User Id</p></li><li><strong>p1</strong>: <em>required (date-only)</em><p>Payment 1</p></li><li><strong>p2</strong>: <em>(date-only)</em><p>Payment 2</p></li><li><strong>role</strong>: <em>required (integer)</em><p>Role Id</p></li><li><strong>payment_method</strong>: <em>required (string - default: website)</em><p>Payment Method (website, link, cash)</p></li><li><strong>duration</strong>: <em>required (string - default: monthly)</em><p>Duration (monthly, yearly)</p></li><li><strong>maintain_status</strong>: <em>required (string)</em><p>Status (continue, completed)</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "user": 1,
+  "p1": "2018-09-10",
+  "p2": "2018-10-10",
+  "role": 2,
+  "payment_method": "website",
+  "duration": "monthly",
+  "maintain_status": "continue"
+}</code></pre></div></div><div class="tab-pane" id="payment_paymentdetail__id___put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Created</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully updated"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_paymentdetail__id___get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/payment/paymentdetail</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Particular payment detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_paymentdetail__id___get_request" data-toggle="tab">Request</a></li><li><a href="#payment_paymentdetail__id___get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_paymentdetail__id___get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="payment_paymentdetail__id___get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+          "id": 1,
+          "status": false,
+          "p1": "2018-09-20",
+          "p2": "2018-10-20",
+          "p3": null,
+          "p4": null,
+          "p5": null,
+          "p6": null,
+          "p7": null,
+          "p8": null,
+          "p9": null,
+          "p10": null,
+          "p11": null,
+          "p12": null,
+          "duration": "monthly",
+          "maintain_status": "continue",
+          "created_at": "2018-09-20T12:37:53.874454+05:30",
+          "updated_at": "2018-09-20T12:37:53.874511+05:30",
+          "user": 1
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_payment_paymentdetail__search__parameter_"><span class="parent">/payment/paymentdetail</span>/?search={parameter}</a> <span class="methods"><a href="#payment_paymentdetail__search__parameter__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_payment_paymentdetail__search__parameter_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Search user payment detail</p></div><div class="list-group"><div onclick="window.location.href = '#payment_paymentdetail__search__parameter__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Parameter Search via email(email format) or mobile (integer)</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="payment_paymentdetail__search__parameter__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/payment/paymentdetail</span>/?search={parameter}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Parameter Search via email(email format) or mobile (integer)</p></div><ul class="nav nav-tabs"><li class="active"><a href="#payment_paymentdetail__search__parameter__get_request" data-toggle="tab">Request</a></li><li><a href="#payment_paymentdetail__search__parameter__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="payment_paymentdetail__search__parameter__get_request"><h3>URI Parameters</h3><ul><li><strong>parameter</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="payment_paymentdetail__search__parameter__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+          "id": 1,
+          "first_name": "Varun",
+          "last_name": "Ajmera",
+          "email": "varunajmera0@gmail.com",
+          "mobile": "97020184121",
+          "role": {
+              "id": 4,
+              "name": "pioneer_gold"
+          },
+          "paymentdetail": [
+              {
+                  "id": 2,
+                  "user": {
+                      "id": 1,
+                      "first_name": "Varun",
+                      "last_name": "Ajmera",
+                      "email": "varunajmera0@gmail.com",
+                      "mobile": "97020184121",
+                      "role": {
+                          "id": 4,
+                          "name": "pioneer_gold"
+                      }
+                  },
+                  "status": false,
+                  "p1": "2018-09-02",
+                  "p2": null,
+                  "p3": null,
+                  "p4": null,
+                  "p5": null,
+                  "p6": null,
+                  "p7": null,
+                  "p8": null,
+                  "p9": null,
+                  "p10": null,
+                  "p11": null,
+                  "p12": null,
+                  "duration": "monthly",
+                  "maintain_status": "completed",
+                  "created_at": "2018-09-24T17:12:20.039614+05:30",
+                  "updated_at": "2018-09-27T12:16:25.897677+05:30"
+              },
+              {
+                  "id": 3,
+                  "user": {
+                      "id": 1,
+                      "first_name": "Varun",
+                      "last_name": "Ajmera",
+                      "email": "varunajmera0@gmail.com",
+                      "mobile": "97020184121",
+                      "role": {
+                          "id": 4,
+                          "name": "pioneer_gold"
+                      }
+                  },
+                  "status": false,
+                  "p1": "2018-09-10",
+                  "p2": "2018-09-28",
+                  "p3": "2018-09-28",
+                  "p4": "2018-09-28",
+                  "p5": "2018-09-28",
+                  "p6": "2018-09-28",
+                  "p7": "2018-09-28",
+                  "p8": "2018-09-28",
+                  "p9": "2018-09-28",
+                  "p10": "2019-06-10",
+                  "p11": "2019-07-10",
+                  "p12": "2019-08-10",
+                  "duration": "monthly",
+                  "maintain_status": "completed",
+                  "created_at": "2018-09-25T17:49:55.690048+05:30",
+                  "updated_at": "2018-09-27T12:16:15.753190+05:30"
+              },
+              {
+                  "id": 8,
+                  "user": {
+                      "id": 1,
+                      "first_name": "Varun",
+                      "last_name": "Ajmera",
+                      "email": "varunajmera0@gmail.com",
+                      "mobile": "97020184121",
+                      "role": {
+                          "id": 4,
+                          "name": "pioneer_gold"
+                      }
+                  },
+                  "status": false,
+                  "p1": "2018-09-27",
+                  "p2": "2018-09-28",
+                  "p3": "2018-09-28",
+                  "p4": "2018-09-28",
+                  "p5": "2018-09-28",
+                  "p6": null,
+                  "p7": null,
+                  "p8": null,
+                  "p9": null,
+                  "p10": null,
+                  "p11": null,
+                  "p12": null,
+                  "duration": "monthly",
+                  "maintain_status": "continue",
+                  "created_at": "2018-09-28T14:33:30.382922+05:30",
+                  "updated_at": "2018-09-28T16:04:09.306759+05:30"
+              }
+          ]
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="allmembers" class="panel-title">/allmembers</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_allmembers_members"><span class="parent">/allmembers</span>/members</a> <span class="methods"><a href="#allmembers_members_post"><span class="badge badge_post">post</span></a> <a href="#allmembers_members_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_allmembers_members" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Add new record for user signup</p></div><div class="list-group"><div onclick="window.location.href = '#allmembers_members_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create signup</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#allmembers_members_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Fetch user detail</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="allmembers_members_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/allmembers</span>/members</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create signup</p></div><ul class="nav nav-tabs"><li class="active"><a href="#allmembers_members_post_request" data-toggle="tab">Request</a></li><li><a href="#allmembers_members_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="allmembers_members_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>first_name</strong>: <em>required (string)</em><p>First name</p></li><li><strong>last_name</strong>: <em>required (string)</em><p>Last name</p></li><li><strong>email</strong>: <em>required (string - pattern: ^.+@.+\..+$)</em><p>Email id (unique)</p></li><li><strong>mobile</strong>: <em>required (string)</em><p>Enter mobile no len 10 digit and it should be NUMERIC(not alpha numeric)</p></li><li><strong>max_age</strong>: <em>(integer - maximum: 100)</em><p>Common age field, extract max age like age=10-20 then max_age=20 , min_age=10</p></li><li><strong>min_age</strong>: <em>(integer - minimum: 0)</em><p>Common age field, extract max age like age=10-20 then max_age=20 , min_age=10</p></li><li><strong>gender</strong>: <em>required (string)</em><p>Select gender({key:value}) {male:male, female:female, other:other}</p></li><li><strong>role</strong>: <em>required (integer)</em><p>Select role</p></li><li><strong>membership</strong>: <em>required (object)</em><ul><li><strong>subscribed_date</strong>: <em>(date-only)</em><p>Select date (required if payment method is selected)</p></li><li><strong>initial_amount</strong>: <em>(integer)</em><p>Enter amount</p></li><li><strong>offer</strong>: <em>(integer - maximum: 11)</em><p>Enter offer</p></li><li><strong>payment_method</strong>: <em>(string)</em><p>Select payment method ({key:value}) {Cash:cash, Website:website, Link:link}</p></li><li><strong>pioneer_duration</strong>: <em>(string)</em><p>Select duration ({key:value}) {Monthly:monthly, Yearly:yearly}</p></li><li><strong>membership_code</strong>: <em>(string)</em><p>Enter membership code</p></li></ul></li><li><strong>userOtherDetail</strong>: <em>required (object)</em><ul><li><strong>hotspot</strong>: <em>(boolean)</em><p>Tick on checkbox</p></li><li><strong>whatsapp</strong>: <em>(boolean)</em><p>Tick on checkbox</p></li><li><strong>insurance</strong>: <em>(boolean)</em><p>Tick on checkbox</p></li><li><strong>note</strong>: <em>(string)</em><p>Textarea for note</p></li><li><strong>looking_for</strong>: <em>(array)</em><p>Multi select ({key:value}) {Co-Founder:co-founder, Customer:customer, Investor:investor}</p></li><li><strong>open_co_found</strong>: <em>(boolean)</em><p>Tick on checkbox</p></li></ul></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "first_name": "varun",
+  "last_name": "ajmera",
+  "email": "varunajmera@gmail.com",
+  "mobile": "8104435075",
+  "max_age": 100,
+  "min_age": 10,
+  "gender": "male",
+  "role": 2,
+  "membership": {
+    "subscribed_date": "2018-09-10",
+    "initial_amount": 2000,
+    "offer": 3,
+    "payment_method": "cash",
+    "pioneer_duration": "monthly",
+    "membership_code": "1800-123-213"
+  },
+  "userOtherDetail": {
+    "hotspot": true,
+    "whatsapp": false,
+    "insurance": false,
+    "note": "hey this is note",
+    "looking_for": [
+      "co-founder",
+      "customer"
+    ],
+    "open_co_found": false
+  }
+}</code></pre></div></div><div class="tab-pane" id="allmembers_members_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>Created</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully created"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="allmembers_members_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/allmembers</span>/members</h4></div><div class="modal-body"><div class="alert alert-info"><p>Fetch user detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#allmembers_members_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="allmembers_members_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 11,
+  "next": "http://127.0.0.1:8000/api/v1/allmembers/?limit=5&amp;offset=10",
+  "previous": "http://127.0.0.1:8000/api/v1/allmembers/?limit=5",
+  "results": [
+      {
+          "id": 76,
+          "first_name": "varun",
+          "last_name": "ajmera",
+          "email": "varunajmera2@gmail.com",
+          "mobile": "8104435075",
+          "max_age": 12,
+          "min_age": 12,
+          "gender": "ghjkk",
+          "role": {
+              "id": 1,
+              "name": "regular",
+              "created_at": "2018-09-03T05:30:00+05:30"
+          },
+          "membership": {
+              "subscribed_date": null,
+              "initial_amount": null,
+              "offer": null,
+              "payment_method": null,
+              "pioneer_duration": null,
+              "membership_code": null
+          },
+          "userOtherDetail": null
+      },
+      {
+          "id": 77,
+          "first_name": "varun",
+          "last_name": "ajmera",
+          "email": "varunajmera21@gmail.com",
+          "mobile": "8104435075",
+          "max_age": 12,
+          "min_age": 12,
+          "gender": "ghjkk",
+          "role": {
+              "id": 1,
+              "name": "regular",
+              "created_at": "2018-09-03T05:30:00+05:30"
+          },
+          "membership": {
+              "subscribed_date": null,
+              "initial_amount": null,
+              "offer": null,
+              "payment_method": null,
+              "pioneer_duration": null,
+              "membership_code": null
+          },
+          "userOtherDetail": null
+      },
+      {
+          "id": 78,
+          "first_name": "varun",
+          "last_name": "ajmera",
+          "email": "varunajmera201@gmail.com",
+          "mobile": "8104435075",
+          "max_age": 12,
+          "min_age": 12,
+          "gender": "ghjkk",
+          "role": {
+              "id": 1,
+              "name": "regular",
+              "created_at": "2018-09-03T05:30:00+05:30"
+          },
+          "membership": {
+              "subscribed_date": null,
+              "initial_amount": null,
+              "offer": null,
+              "payment_method": null,
+              "pioneer_duration": null,
+              "membership_code": null
+          },
+          "userOtherDetail": null
+      },
+      {
+          "id": 79,
+          "first_name": "varun",
+          "last_name": "ajmera",
+          "email": "varunajmera201s@gmail.com",
+          "mobile": "8104435075",
+          "max_age": 12,
+          "min_age": 12,
+          "gender": "ghjkk",
+          "role": {
+              "id": 1,
+              "name": "regular",
+              "created_at": "2018-09-03T05:30:00+05:30"
+          },
+          "membership": {
+              "subscribed_date": null,
+              "initial_amount": null,
+              "offer": null,
+              "payment_method": null,
+              "pioneer_duration": null,
+              "membership_code": null
+          },
+          "userOtherDetail": null
+      },
+      {
+          "id": 80,
+          "first_name": "varun1",
+          "last_name": "ajmera",
+          "email": "varunajmera201ss@gmail.com",
+          "mobile": "8104435075",
+          "max_age": 12,
+          "min_age": 12,
+          "gender": "ghjkk",
+          "role": {
+              "id": 1,
+              "name": "regular",
+              "created_at": "2018-09-03T05:30:00+05:30"
+          },
+          "membership": {
+              "subscribed_date": null,
+              "initial_amount": null,
+              "offer": null,
+              "payment_method": null,
+              "pioneer_duration": null,
+              "membership_code": null
+          },
+          "userOtherDetail": null
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_allmembers_members__id__"><span class="parent">/allmembers/members</span>/{id}/</a> <span class="methods"><a href="#allmembers_members__id___put"><span class="badge badge_put">put</span></a> <a href="#allmembers_members__id___get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_allmembers_members__id__" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>id (Integer) of user</p></div><div class="list-group"><div onclick="window.location.href = '#allmembers_members__id___put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Update user detail</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#allmembers_members__id___get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Particular user detail</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="allmembers_members__id___put"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/allmembers/members</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update user detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#allmembers_members__id___put_request" data-toggle="tab">Request</a></li><li><a href="#allmembers_members__id___put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="allmembers_members__id___put_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>first_name</strong>: <em>required (string)</em><p>First name</p></li><li><strong>last_name</strong>: <em>required (string)</em><p>Last name</p></li><li><strong>email</strong>: <em>required (string - pattern: ^.+@.+\..+$)</em><p>Email id (unique)</p></li><li><strong>mobile</strong>: <em>required (string)</em><p>Enter mobile no len 10 digit and it should be NUMERIC(not alpha numeric)</p></li><li><strong>max_age</strong>: <em>(integer - maximum: 100)</em><p>Common age field, extract max age like age=10-20 then max_age=20 , min_age=10</p></li><li><strong>min_age</strong>: <em>(integer - minimum: 0)</em><p>Common age field, extract max age like age=10-20 then max_age=20 , min_age=10</p></li><li><strong>gender</strong>: <em>required (string)</em><p>Select gender({key:value}) {male:male, female:female, other:other}</p></li><li><strong>role</strong>: <em>required (integer)</em><p>Select role</p></li><li><strong>membership</strong>: <em>required (object)</em><ul><li><strong>subscribed_date</strong>: <em>(date-only)</em><p>Select date (required if payment method is selected)</p></li><li><strong>initial_amount</strong>: <em>(integer)</em><p>Enter amount</p></li><li><strong>offer</strong>: <em>(integer - maximum: 11)</em><p>Enter offer</p></li><li><strong>payment_method</strong>: <em>(string)</em><p>Select payment method ({key:value}) {Cash:cash, Website:website, Link:link}</p></li><li><strong>pioneer_duration</strong>: <em>(string)</em><p>Select duration ({key:value}) {Monthly:monthly, Yearly:yearly}</p></li><li><strong>membership_code</strong>: <em>(string)</em><p>Enter membership code</p></li></ul></li><li><strong>userOtherDetail</strong>: <em>required (object)</em><ul><li><strong>hotspot</strong>: <em>(boolean)</em><p>Tick on checkbox</p></li><li><strong>whatsapp</strong>: <em>(boolean)</em><p>Tick on checkbox</p></li><li><strong>insurance</strong>: <em>(boolean)</em><p>Tick on checkbox</p></li><li><strong>note</strong>: <em>(string)</em><p>Textarea for note</p></li><li><strong>looking_for</strong>: <em>(array)</em><p>Multi select ({key:value}) {Co-Founder:co-founder, Customer:customer, Investor:investor}</p></li><li><strong>open_co_found</strong>: <em>(boolean)</em><p>Tick on checkbox</p></li></ul></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "first_name": "varun",
+  "last_name": "ajmera",
+  "email": "varunajmera@gmail.com",
+  "mobile": "8104435075",
+  "max_age": 100,
+  "min_age": 10,
+  "gender": "male",
+  "role": 2,
+  "membership": {
+    "subscribed_date": "2018-09-10",
+    "initial_amount": 2000,
+    "offer": 3,
+    "payment_method": "cash",
+    "pioneer_duration": "monthly",
+    "membership_code": "1800-123-213"
+  },
+  "userOtherDetail": {
+    "hotspot": true,
+    "whatsapp": false,
+    "insurance": false,
+    "note": "hey this is note",
+    "looking_for": [
+      "co-founder",
+      "customer"
+    ],
+    "open_co_found": false
+  }
+}</code></pre></div></div><div class="tab-pane" id="allmembers_members__id___put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Updated</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully update"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="allmembers_members__id___get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/allmembers/members</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Particular user detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#allmembers_members__id___get_request" data-toggle="tab">Request</a></li><li><a href="#allmembers_members__id___get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="allmembers_members__id___get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="allmembers_members__id___get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+        "id": 2,
+        "first_name": "varun",
+        "last_name": "ajmera",
+        "email": "varunajmera@gmail.com",
+        "mobile": "8104435075",
+        "max_age": 12,
+        "min_age": 12,
+        "gender": "ghjkk",
+        "role": {
+            "id": 3,
+            "name": "pioneer_plus",
+            "created_at": "2018-09-03T05:30:00+05:30"
+        },
+        "membership": {
+            "subscribed_date": null,
+            "initial_amount": null,
+            "offer": null,
+            "payment_method": null,
+            "pioneer_duration": null,
+            "membership_code": null
+        },
+        "userOtherDetail": {
+            "id": 2,
+            "hotspot": true,
+            "whatsapp": false,
+            "insurance": false,
+            "note": "",
+            "looking_for": [
+                "varun",
+                "ajmera",
+                "sad"
+            ],
+            "open_co_found": false
+        }
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_allmembers_members__search__parameter_"><span class="parent">/allmembers/members</span>/?search={parameter}</a> <span class="methods"><a href="#allmembers_members__search__parameter__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_allmembers_members__search__parameter_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Search member</p></div><div class="list-group"><div onclick="window.location.href = '#allmembers_members__search__parameter__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Parameter Search via email(email format) or mobile (integer)</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="allmembers_members__search__parameter__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/allmembers/members</span>/?search={parameter}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Parameter Search via email(email format) or mobile (integer)</p></div><ul class="nav nav-tabs"><li class="active"><a href="#allmembers_members__search__parameter__get_request" data-toggle="tab">Request</a></li><li><a href="#allmembers_members__search__parameter__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="allmembers_members__search__parameter__get_request"><h3>URI Parameters</h3><ul><li><strong>parameter</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="allmembers_members__search__parameter__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+        "id": 2,
+        "first_name": "varun",
+        "last_name": "ajmera",
+        "email": "varunajmera@gmail.com",
+        "mobile": "8104435075",
+        "max_age": 12,
+        "min_age": 12,
+        "gender": "ghjkk",
+        "role": {
+            "id": 3,
+            "name": "pioneer_plus",
+            "created_at": "2018-09-03T05:30:00+05:30"
+        },
+        "membership": {
+            "subscribed_date": null,
+            "initial_amount": null,
+            "offer": null,
+            "payment_method": null,
+            "pioneer_duration": null,
+            "membership_code": null
+        },
+        "userOtherDetail": {
+            "id": 2,
+            "hotspot": true,
+            "whatsapp": false,
+            "insurance": false,
+            "note": "",
+            "looking_for": [
+                "varun",
+                "ajmera",
+                "sad"
+            ],
+            "open_co_found": false
+        }
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="experthours" class="panel-title">/experthours</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_bookslot_"><span class="parent">/experthours</span>/bookslot/</a> <span class="methods"><a href="#experthours_bookslot__post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_experthours_bookslot_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Book a slot</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_bookslot__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create booking</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_bookslot__post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/experthours</span>/bookslot/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create booking</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_bookslot__post_request" data-toggle="tab">Request</a></li><li><a href="#experthours_bookslot__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_bookslot__post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>user</strong>: <em>required (integer)</em><p>User Id</p></li><li><strong>consultancy</strong>: <em>required (integer)</em><p>Consultancy Id (i.e. IT, Business, Ca, Cs, Legal)</p></li><li><strong>booked_date</strong>: <em>required (date-only)</em><p>Booking date</p></li><li><strong>booked_from_time</strong>: <em>required (time-only)</em><p>Booking time (Convert into 24 hrs format)</p></li><li><strong>session_topic</strong>: <em>(string)</em><p>Textarea</p></li><li><strong>session_type</strong>: <em>(string)</em><p>Select person or skype</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "user": 1,
+  "consultancy": 1,
+  "booked_date": "2018-10-10",
+  "booked_from_time": "10:00:00",
+  "session_topic": "website for expert hrs",
+  "session_type": "skype"
+}</code></pre></div></div><div class="tab-pane" id="experthours_bookslot__post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>Created</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully created"
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_bookslot___id__"><span class="parent">/experthours/bookslot/</span>/{id}/</a> <span class="methods"><a href="#experthours_bookslot___id___put"><span class="badge badge_put">put</span></a> <a href="#experthours_bookslot___id___get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_bookslot___id__" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Fetch particular slot</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_bookslot___id___put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Update slot</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#experthours_bookslot___id___get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Particular slot detail</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_bookslot___id___put"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/experthours/bookslot/</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update slot</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_bookslot___id___put_request" data-toggle="tab">Request</a></li><li><a href="#experthours_bookslot___id___put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_bookslot___id___put_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>user</strong>: <em>required (integer)</em><p>User Id</p></li><li><strong>consultancy</strong>: <em>required (integer)</em><p>Consultancy Id (i.e. IT, Business, Ca, Cs, Legal)</p></li><li><strong>booked_date</strong>: <em>required (date-only)</em><p>Booking date</p></li><li><strong>booked_from_time</strong>: <em>required (time-only)</em><p>Booking time (Convert into 24 hrs format)</p></li><li><strong>session_topic</strong>: <em>(string)</em><p>Textarea</p></li><li><strong>session_type</strong>: <em>(string)</em><p>Select person or skype</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "user": 1,
+  "consultancy": 1,
+  "booked_date": "2018-10-10",
+  "booked_from_time": "10:00:00",
+  "session_topic": "website for expert hrs",
+  "session_type": "skype"
+}</code></pre></div></div><div class="tab-pane" id="experthours_bookslot___id___put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Updated</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully updated"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_bookslot___id___get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours/bookslot/</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Particular slot detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_bookslot___id___get_request" data-toggle="tab">Request</a></li><li><a href="#experthours_bookslot___id___get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_bookslot___id___get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="experthours_bookslot___id___get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "id": 1,
+  "bookedslots": "01:00:00",
+  "booked_date": "2018-09-26",
+  "booked_from_time": "19:25:14",
+  "booked_to_time": "20:25:16",
+  "session_topic": "",
+  "session_type": "person",
+  "membership_status": "same",
+  "created_at": "2018-09-26T19:26:07.891138+05:30",
+  "updated_at": "2018-09-26T19:26:07.891181+05:30",
+  "user": 2,
+  "consultancy": 1,
+  "category": 1
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_freeslot__user_id___category___from_date___to_date__"><span class="parent">/experthours</span>/freeslot/{user_id}/{category}/{from_date}/{to_date}/</a> <span class="methods"><a href="#experthours_freeslot__user_id___category___from_date___to_date___get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_freeslot__user_id___category___from_date___to_date__" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>user_id - User Id, category - Category Id, from_date - From date (YYYY-MM-DD) format, to_date - To date (YYYY-MM-DD) format</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_freeslot__user_id___category___from_date___to_date___get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get list of particular consultancy slot detail with the help of from date - to date and User id</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_freeslot__user_id___category___from_date___to_date___get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours</span>/freeslot/{user_id}/{category}/{from_date}/{to_date}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get list of particular consultancy slot detail with the help of from date - to date and User id</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_freeslot__user_id___category___from_date___to_date___get_request" data-toggle="tab">Request</a></li><li><a href="#experthours_freeslot__user_id___category___from_date___to_date___get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_freeslot__user_id___category___from_date___to_date___get_request"><h3>URI Parameters</h3><ul><li><strong>user_id</strong>: <em>required (string)</em></li><li><strong>category</strong>: <em>required (string)</em></li><li><strong>from_date</strong>: <em>required (string)</em></li><li><strong>to_date</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="experthours_freeslot__user_id___category___from_date___to_date___get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+   "2018-09-29": {
+     "1": [
+         {
+             "06:00:00": "free"
+         },
+         {
+             "07:00:00": "free"
+         },
+         {
+             "08:00:00": "free"
+         },
+         {
+             "09:00:00": "free"
+         },
+         {
+             "10:00:00": "booked by someone else"
+         },
+         {
+             "11:00:00": "free"
+         },
+         {
+             "12:00:00": "free"
+         }
+     ],
+     "2": [
+         {
+             "06:00:00": "free"
+         },
+         {
+             "07:00:00": "free"
+         },
+         {
+             "08:00:00": "booked by you"
+         },
+         {
+             "09:00:00": "free"
+         },
+         {
+             "10:00:00": "free"
+         },
+         {
+             "11:00:00": "free"
+         },
+         {
+             "12:00:00": "free"
+         }
+     ]
+   }
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_expertavaiableslot_"><span class="parent">/experthours</span>/expertavaiableslot/</a> <span class="methods"><a href="#experthours_expertavaiableslot__post"><span class="badge badge_post">post</span></a> <a href="#experthours_expertavaiableslot__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_expertavaiableslot_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Create and list slot with the help of experts</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_expertavaiableslot__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create slot</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#experthours_expertavaiableslot__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get All available slot details</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_expertavaiableslot__post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/experthours</span>/expertavaiableslot/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create slot</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_expertavaiableslot__post_request" data-toggle="tab">Request</a></li><li><a href="#experthours_expertavaiableslot__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_expertavaiableslot__post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>available_dates</strong>: <em>required (array)</em><p>Array of available_dates</p></li><li><strong>person</strong>: <em>required (integer)</em><p>Person Id (expert person)</p></li><li><strong>start_time</strong>: <em>required (string)</em><p>Starting time (hh:mm AM/PM) format</p></li><li><strong>end_time</strong>: <em>required (string)</em><p>Ending time (hh:mm AM/PM) format</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "available_dates": [
+    "2018-09-10",
+    "2018-09-11"
+  ],
+  "person": 1,
+  "start_time": "10:00 AM",
+  "end_time": "11:00 AM"
+}</code></pre></div></div><div class="tab-pane" id="experthours_expertavaiableslot__post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>Created</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully created"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_expertavaiableslot__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours</span>/expertavaiableslot/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get All available slot details</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_expertavaiableslot__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_expertavaiableslot__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+          "id": 1,
+          "person": {
+              "id": 1,
+              "consultancy": {
+                  "id": 1,
+                  "category": {
+                      "id": 1,
+                      "cat_name": "IT",
+                      "created_at": "2018-09-26T19:25:52.322085+05:30",
+                      "updated_at": "2018-09-26T19:25:52.322131+05:30"
+                  },
+                  "cons_name": "IT Consultancy",
+                  "description": "",
+                  "created_at": "2018-09-26T19:26:04.819879+05:30",
+                  "updated_at": "2018-09-26T19:26:04.819922+05:30"
+              },
+              "first_name": "Varun",
+              "last_name": "Ajmera",
+              "mobile": "8104435075",
+              "email": "varunajmera0@gmail.com",
+              "created_at": "2018-09-29T10:16:37.160980+05:30",
+              "updated_at": "2018-09-29T10:16:37.161022+05:30"
+          },
+          "available_dates": "2018-09-29",
+          "start_time": "06:00:00",
+          "end_time": "12:00:00",
+          "created_at": "2018-09-29T10:16:38.743103+05:30",
+          "updated_at": "2018-09-29T10:57:59.057122+05:30"
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_category"><span class="parent">/experthours</span>/category</a> <span class="methods"><a href="#experthours_category_post"><span class="badge badge_post">post</span></a> <a href="#experthours_category_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_category" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Create category like IT, Business, Compliance</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_category_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create category</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#experthours_category_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get All available category</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_category_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/experthours</span>/category</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create category</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_category_post_request" data-toggle="tab">Request</a></li><li><a href="#experthours_category_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_category_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cat_name</strong>: <em>required (string)</em><p>Category name</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "cat_name": "IT"
+}</code></pre></div></div><div class="tab-pane" id="experthours_category_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>Created</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully created"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_category_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours</span>/category</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get All available category</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_category_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_category_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+          "id": 1,
+          "cat_name": "IT",
+          "created_at": "2018-09-26T19:25:52.322085+05:30",
+          "updated_at": "2018-09-26T19:25:52.322131+05:30"
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_category__id__"><span class="parent">/experthours/category</span>/{id}/</a> <span class="methods"><a href="#experthours_category__id___put"><span class="badge badge_put">put</span></a> <a href="#experthours_category__id___get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_category__id__" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Particular category detail</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_category__id___put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Update Particular category detail</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#experthours_category__id___get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get Updated Particular category detail</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_category__id___put"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/experthours/category</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update Particular category detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_category__id___put_request" data-toggle="tab">Request</a></li><li><a href="#experthours_category__id___put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_category__id___put_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cat_name</strong>: <em>required (string)</em><p>Category name</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "cat_name": "IT"
+}</code></pre></div></div><div class="tab-pane" id="experthours_category__id___put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Updated</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully updated"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_category__id___get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours/category</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get Updated Particular category detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_category__id___get_request" data-toggle="tab">Request</a></li><li><a href="#experthours_category__id___get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_category__id___get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="experthours_category__id___get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "id": 1,
+  "cat_name": "IT",
+  "created_at": "2018-09-26T19:25:52.322085+05:30",
+  "updated_at": "2018-09-26T19:25:52.322131+05:30"
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_consultancy"><span class="parent">/experthours</span>/consultancy</a> <span class="methods"><a href="#experthours_consultancy_post"><span class="badge badge_post">post</span></a> <a href="#experthours_consultancy_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_consultancy" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Create consultancy like IT, Business, CS, CA, Legal</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_consultancy_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create consultancy</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#experthours_consultancy_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get All available category</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_consultancy_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/experthours</span>/consultancy</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create consultancy</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_consultancy_post_request" data-toggle="tab">Request</a></li><li><a href="#experthours_consultancy_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_consultancy_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cons_name</strong>: <em>required (string)</em><p>Consultancy name</p></li><li><strong>description</strong>: <em>(string)</em><p>Description related to Consultancy (textarea)</p></li><li><strong>category</strong>: <em>required (integer)</em><p>Category Id</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "cons_name": "IT consultancy",
+  "description": "optional",
+  "category": 1
+}</code></pre></div></div><div class="tab-pane" id="experthours_consultancy_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>Created</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully created"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_consultancy_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours</span>/consultancy</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get All available category</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_consultancy_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_consultancy_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+        "id": 1,
+        "category": {
+            "id": 1,
+            "cat_name": "IT",
+            "created_at": "2018-09-26T19:25:52.322085+05:30",
+            "updated_at": "2018-09-26T19:25:52.322131+05:30"
+        },
+        "cons_name": "IT Consultancy",
+        "description": "",
+        "created_at": "2018-09-26T19:26:04.819879+05:30",
+        "updated_at": "2018-09-26T19:26:04.819922+05:30"
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_consultancy__id__"><span class="parent">/experthours/consultancy</span>/{id}/</a> <span class="methods"><a href="#experthours_consultancy__id___put"><span class="badge badge_put">put</span></a> <a href="#experthours_consultancy__id___get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_consultancy__id__" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Particular category detail</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_consultancy__id___put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Update Particular category detail</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#experthours_consultancy__id___get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get Updated Particular category detail</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_consultancy__id___put"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/experthours/consultancy</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update Particular category detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_consultancy__id___put_request" data-toggle="tab">Request</a></li><li><a href="#experthours_consultancy__id___put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_consultancy__id___put_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cons_name</strong>: <em>required (string)</em><p>Consultancy name</p></li><li><strong>description</strong>: <em>(string)</em><p>Description related to Consultancy (textarea)</p></li><li><strong>category</strong>: <em>required (integer)</em><p>Category Id</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "cons_name": "IT consultancy",
+  "description": "optional",
+  "category": 1
+}</code></pre></div></div><div class="tab-pane" id="experthours_consultancy__id___put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Updated</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully updated"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_consultancy__id___get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours/consultancy</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get Updated Particular category detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_consultancy__id___get_request" data-toggle="tab">Request</a></li><li><a href="#experthours_consultancy__id___get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_consultancy__id___get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="experthours_consultancy__id___get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+"id": 1,
+"category": {
+    "id": 1,
+    "cat_name": "IT",
+    "created_at": "2018-09-26T19:25:52.322085+05:30",
+    "updated_at": "2018-09-26T19:25:52.322131+05:30"
+},
+"cons_name": "IT Consultancy",
+"description": "",
+"created_at": "2018-09-26T19:26:04.819879+05:30",
+"updated_at": "2018-09-26T19:26:04.819922+05:30"
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_expertperson"><span class="parent">/experthours</span>/expertperson</a> <span class="methods"><a href="#experthours_expertperson_post"><span class="badge badge_post">post</span></a> <a href="#experthours_expertperson_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_expertperson" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Create and get expertise</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_expertperson_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create expert person</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#experthours_expertperson_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get All available expertise</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_expertperson_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/experthours</span>/expertperson</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create expert person</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_expertperson_post_request" data-toggle="tab">Request</a></li><li><a href="#experthours_expertperson_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_expertperson_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>first_name</strong>: <em>required (string)</em><p>First name</p></li><li><strong>last_name</strong>: <em>(string)</em><p>Last name</p></li><li><strong>mobile</strong>: <em>required (integer)</em><p>Mobile no.</p></li><li><strong>email</strong>: <em>required (string - pattern: ^.+@.+\..+$)</em><p>Enter email (check email)</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "first_name": "Varun",
+  "last_name": "Ajmera",
+  "mobile": 8104435075,
+  "email": "varun@gmail.com"
+}</code></pre></div></div><div class="tab-pane" id="experthours_expertperson_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>Created</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully created"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_expertperson_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours</span>/expertperson</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get All available expertise</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_expertperson_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_expertperson_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+        "id": 1,
+        "consultancy": {
+            "id": 1,
+            "category": {
+                "id": 1,
+                "cat_name": "IT",
+                "created_at": "2018-09-26T19:25:52.322085+05:30",
+                "updated_at": "2018-09-26T19:25:52.322131+05:30"
+            },
+            "cons_name": "IT Consultancy",
+            "description": "",
+            "created_at": "2018-09-26T19:26:04.819879+05:30",
+            "updated_at": "2018-09-26T19:26:04.819922+05:30"
+        },
+        "first_name": "Varun",
+        "last_name": "Ajmera",
+        "mobile": "8104435075",
+        "email": "varunajmera0@gmail.com",
+        "created_at": "2018-09-29T10:16:37.160980+05:30",
+        "updated_at": "2018-09-29T10:16:37.161022+05:30"
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_expertperson__id__"><span class="parent">/experthours/expertperson</span>/{id}/</a> <span class="methods"><a href="#experthours_expertperson__id___put"><span class="badge badge_put">put</span></a> <a href="#experthours_expertperson__id___get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_expertperson__id__" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Particular expertise person detail</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_expertperson__id___put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Update Particular person detail</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#experthours_expertperson__id___get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get Updated expertise person detail</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_expertperson__id___put"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/experthours/expertperson</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update Particular person detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_expertperson__id___put_request" data-toggle="tab">Request</a></li><li><a href="#experthours_expertperson__id___put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_expertperson__id___put_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>first_name</strong>: <em>required (string)</em><p>First name</p></li><li><strong>last_name</strong>: <em>(string)</em><p>Last name</p></li><li><strong>mobile</strong>: <em>required (integer)</em><p>Mobile no.</p></li><li><strong>email</strong>: <em>required (string - pattern: ^.+@.+\..+$)</em><p>Enter email (check email)</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "first_name": "Varun",
+  "last_name": "Ajmera",
+  "mobile": 8104435075,
+  "email": "varun@gmail.com"
+}</code></pre></div></div><div class="tab-pane" id="experthours_expertperson__id___put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Updated</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully updated"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_expertperson__id___get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours/expertperson</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get Updated expertise person detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_expertperson__id___get_request" data-toggle="tab">Request</a></li><li><a href="#experthours_expertperson__id___get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_expertperson__id___get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="experthours_expertperson__id___get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "id": 1,
+  "consultancy": {
+      "id": 1,
+      "category": {
+          "id": 1,
+          "cat_name": "IT",
+          "created_at": "2018-09-26T19:25:52.322085+05:30",
+          "updated_at": "2018-09-26T19:25:52.322131+05:30"
+      },
+      "cons_name": "IT Consultancy",
+      "description": "",
+      "created_at": "2018-09-26T19:26:04.819879+05:30",
+      "updated_at": "2018-09-26T19:26:04.819922+05:30"
+  },
+  "first_name": "Varun",
+  "last_name": "Ajmera",
+  "mobile": "8104435075",
+  "email": "varunajmera0@gmail.com",
+  "created_at": "2018-09-29T10:16:37.160980+05:30",
+  "updated_at": "2018-09-29T10:16:37.161022+05:30"
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_expertperson__search__parameter_"><span class="parent">/experthours/expertperson</span>/?search={parameter}</a> <span class="methods"><a href="#experthours_expertperson__search__parameter__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_expertperson__search__parameter_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Search available member dates using expert person</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_expertperson__search__parameter__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Parameter Search via expert peson email(email format) or expert person mobile (integer) or expert person first name (string) or expert person last name (string)</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_expertperson__search__parameter__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours/expertperson</span>/?search={parameter}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Parameter Search via expert peson email(email format) or expert person mobile (integer) or expert person first name (string) or expert person last name (string)</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_expertperson__search__parameter__get_request" data-toggle="tab">Request</a></li><li><a href="#experthours_expertperson__search__parameter__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_expertperson__search__parameter__get_request"><h3>URI Parameters</h3><ul><li><strong>parameter</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="experthours_expertperson__search__parameter__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+ "count": 1,
+ "next": null,
+ "previous": null,
+ "results": [
+     {
+         "id": 1,
+         "person": {
+             "id": 1,
+             "consultancy": {
+                 "id": 1,
+                 "category": {
+                     "id": 1,
+                     "cat_name": "IT",
+                     "created_at": "2018-09-26T19:25:52.322085+05:30",
+                     "updated_at": "2018-09-26T19:25:52.322131+05:30"
+                 },
+                 "cons_name": "IT Consultancy",
+                 "description": "",
+                 "created_at": "2018-09-26T19:26:04.819879+05:30",
+                 "updated_at": "2018-09-26T19:26:04.819922+05:30"
+             },
+             "first_name": "Varun",
+             "last_name": "Ajmera",
+             "mobile": "8104435075",
+             "email": "varunajmera0@gmail.com",
+             "created_at": "2018-09-29T10:16:37.160980+05:30",
+             "updated_at": "2018-09-29T10:16:37.161022+05:30"
+         },
+         "available_dates": "2018-09-29",
+         "start_time": "06:00:00",
+         "end_time": "12:00:00",
+         "created_at": "2018-09-29T10:16:38.743103+05:30",
+         "updated_at": "2018-09-29T10:57:59.057122+05:30"
+     }
+ ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_slotdetail"><span class="parent">/experthours</span>/slotdetail</a> <span class="methods"><a href="#experthours_slotdetail_post"><span class="badge badge_post">post</span></a> <a href="#experthours_slotdetail_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_slotdetail" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Create and get slot detail</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_slotdetail_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create slot detail</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#experthours_slotdetail_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get All slot detail</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_slotdetail_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/experthours</span>/slotdetail</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create slot detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_slotdetail_post_request" data-toggle="tab">Request</a></li><li><a href="#experthours_slotdetail_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_slotdetail_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>pioneer</strong>: <em>(integer)</em><p>Role Id and if pioneer selected then pioneer_slotHr, pioneer_noOfSlots, pioneer_monthGap must also be filled.</p></li><li><strong>pioneer_slotHr</strong>: <em>(integer)</em><p>Slot duration(30, 60) according to package</p></li><li><strong>pioneer_noOfSlots</strong>: <em>(integer)</em><p>No of slots (6, 12) according to package</p></li><li><strong>pioneer_monthGap</strong>: <em>(integer)</em><p>Month Gap (1, 2) according to package</p></li><li><strong>pioneer_plus</strong>: <em>(integer)</em><p>Role Id and if pioneer plus selected then pioneer_plus_slotHr, pioneer_plus_noOfSlots, pioneer_plus_monthGap must also be filled.</p></li><li><strong>pioneer_plus_slotHr</strong>: <em>(integer)</em><p>Slot duration(30, 60) according to package</p></li><li><strong>pioneer_plus_noOfSlots</strong>: <em>(integer)</em><p>No of slots (6, 12) according to package</p></li><li><strong>pioneer_plus_monthGap</strong>: <em>(integer)</em><p>Month Gap (1, 2) according to package</p></li><li><strong>pioneer_gold</strong>: <em>(integer)</em><p>Role Id and if pioneer gold selected then pioneer_gold_slotHr, pioneer_gold_noOfSlots, pioneer_gold_monthGap must also be filled.</p></li><li><strong>pioneer_gold_slotHr</strong>: <em>(integer)</em><p>Slot duration(30, 60) according to package</p></li><li><strong>pioneer_gold_noOfSlots</strong>: <em>(integer)</em><p>No of slots (6, 12) according to package</p></li><li><strong>pioneer_gold_monthGap</strong>: <em>(integer)</em><p>Month Gap (1, 2) according to package</p></li><li><strong>pioneer_platinum</strong>: <em>(integer)</em><p>Role Id and if pioneer platinum selected then pioneer_platinum_slotHr, pioneer_platinum_noOfSlots, pioneer_platinum_monthGap must also be filled.</p></li><li><strong>pioneer_platinum_slotHr</strong>: <em>(integer)</em><p>Slot duration(30, 60) according to package</p></li><li><strong>pioneer_platinum_noOfSlots</strong>: <em>(integer)</em><p>No of slots (6, 12) according to package</p></li><li><strong>pioneer_platinum_monthGap</strong>: <em>(integer)</em><p>Month Gap (1, 2) according to package</p></li><li><strong>category</strong>: <em>required (integer)</em><p>Category Id</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "pioneer": 2,
+  "pioneer_slotHr": 30,
+  "pioneer_noOfSlots": 6,
+  "pioneer_plus_monthGap": 2,
+  "category": 1
+}</code></pre></div></div><div class="tab-pane" id="experthours_slotdetail_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>Created</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully created"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_slotdetail_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours</span>/slotdetail</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get All slot detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_slotdetail_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_slotdetail_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+      {
+      "id": 1,
+      "pioneer": {
+          "id": 2,
+          "name": "pioneer"
+      },
+      "pioneer_plus": null,
+      "pioneer_gold": {
+          "id": 4,
+          "name": "pioneer_gold"
+      },
+      "pioneer_platinum": null,
+      "pioneer_slotHr": 30,
+      "pioneer_noOfSlots": 6,
+      "pioneer_monthGap": 2,
+      "pioneer_plus_slotHr": null,
+      "pioneer_plus_noOfSlots": null,
+      "pioneer_plus_monthGap": null,
+      "pioneer_gold_slotHr": 60,
+      "pioneer_gold_noOfSlots": 6,
+      "pioneer_gold_monthGap": 6,
+      "pioneer_platinum_slotHr": null,
+      "pioneer_platinum_noOfSlots": null,
+      "pioneer_platinum_monthGap": null,
+      "category": 1
+      }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_experthours_slotdetail__id__"><span class="parent">/experthours/slotdetail</span>/{id}/</a> <span class="methods"><a href="#experthours_slotdetail__id___put"><span class="badge badge_put">put</span></a> <a href="#experthours_slotdetail__id___get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_experthours_slotdetail__id__" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Particular slot detail</p></div><div class="list-group"><div onclick="window.location.href = '#experthours_slotdetail__id___put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Update Particular slot detail</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#experthours_slotdetail__id___get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get Updated slot detail</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_slotdetail__id___put"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/experthours/slotdetail</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update Particular slot detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_slotdetail__id___put_request" data-toggle="tab">Request</a></li><li><a href="#experthours_slotdetail__id___put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_slotdetail__id___put_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>pioneer</strong>: <em>(integer)</em><p>Role Id and if pioneer selected then pioneer_slotHr, pioneer_noOfSlots, pioneer_monthGap must also be filled.</p></li><li><strong>pioneer_slotHr</strong>: <em>(integer)</em><p>Slot duration(30, 60) according to package</p></li><li><strong>pioneer_noOfSlots</strong>: <em>(integer)</em><p>No of slots (6, 12) according to package</p></li><li><strong>pioneer_monthGap</strong>: <em>(integer)</em><p>Month Gap (1, 2) according to package</p></li><li><strong>pioneer_plus</strong>: <em>(integer)</em><p>Role Id and if pioneer plus selected then pioneer_plus_slotHr, pioneer_plus_noOfSlots, pioneer_plus_monthGap must also be filled.</p></li><li><strong>pioneer_plus_slotHr</strong>: <em>(integer)</em><p>Slot duration(30, 60) according to package</p></li><li><strong>pioneer_plus_noOfSlots</strong>: <em>(integer)</em><p>No of slots (6, 12) according to package</p></li><li><strong>pioneer_plus_monthGap</strong>: <em>(integer)</em><p>Month Gap (1, 2) according to package</p></li><li><strong>pioneer_gold</strong>: <em>(integer)</em><p>Role Id and if pioneer gold selected then pioneer_gold_slotHr, pioneer_gold_noOfSlots, pioneer_gold_monthGap must also be filled.</p></li><li><strong>pioneer_gold_slotHr</strong>: <em>(integer)</em><p>Slot duration(30, 60) according to package</p></li><li><strong>pioneer_gold_noOfSlots</strong>: <em>(integer)</em><p>No of slots (6, 12) according to package</p></li><li><strong>pioneer_gold_monthGap</strong>: <em>(integer)</em><p>Month Gap (1, 2) according to package</p></li><li><strong>pioneer_platinum</strong>: <em>(integer)</em><p>Role Id and if pioneer platinum selected then pioneer_platinum_slotHr, pioneer_platinum_noOfSlots, pioneer_platinum_monthGap must also be filled.</p></li><li><strong>pioneer_platinum_slotHr</strong>: <em>(integer)</em><p>Slot duration(30, 60) according to package</p></li><li><strong>pioneer_platinum_noOfSlots</strong>: <em>(integer)</em><p>No of slots (6, 12) according to package</p></li><li><strong>pioneer_platinum_monthGap</strong>: <em>(integer)</em><p>Month Gap (1, 2) according to package</p></li><li><strong>category</strong>: <em>required (integer)</em><p>Category Id</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "pioneer": 2,
+  "pioneer_slotHr": 30,
+  "pioneer_noOfSlots": 6,
+  "pioneer_plus_monthGap": 2,
+  "category": 1
+}</code></pre></div></div><div class="tab-pane" id="experthours_slotdetail__id___put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Updated</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Successfully updated"
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="experthours_slotdetail__id___get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/experthours/slotdetail</span>/{id}/</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get Updated slot detail</p></div><ul class="nav nav-tabs"><li class="active"><a href="#experthours_slotdetail__id___get_request" data-toggle="tab">Request</a></li><li><a href="#experthours_slotdetail__id___get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="experthours_slotdetail__id___get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="experthours_slotdetail__id___get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "id": 1,
+  "pioneer": {
+      "id": 2,
+      "name": "pioneer"
+  },
+  "pioneer_plus": null,
+  "pioneer_gold": {
+      "id": 4,
+      "name": "pioneer_gold"
+  },
+  "pioneer_platinum": null,
+  "pioneer_slotHr": 30,
+  "pioneer_noOfSlots": 6,
+  "pioneer_monthGap": 2,
+  "pioneer_plus_slotHr": null,
+  "pioneer_plus_noOfSlots": null,
+  "pioneer_plus_monthGap": null,
+  "pioneer_gold_slotHr": 60,
+  "pioneer_gold_noOfSlots": 6,
+  "pioneer_gold_monthGap": 6,
+  "pioneer_platinum_slotHr": null,
+  "pioneer_platinum_noOfSlots": null,
+  "pioneer_platinum_monthGap": null,
+  "category": 1
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="demoday" class="panel-title">/demoday</h3></div><div class="panel-body"><div class="top-resource-description"><p>Demoday Ticket</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_demoday_demoday_ticket"><span class="parent">/demoday</span>/demoday-ticket</a> <span class="methods"><a href="#demoday_demoday_ticket_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_demoday_demoday_ticket" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#demoday_demoday_ticket_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Buy demoday ticket</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="demoday_demoday_ticket_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/demoday</span>/demoday-ticket</h4></div><div class="modal-body"><div class="alert alert-info"><p>Buy demoday ticket</p></div><ul class="nav nav-tabs"><li class="active"><a href="#demoday_demoday_ticket_post_request" data-toggle="tab">Request</a></li><li><a href="#demoday_demoday_ticket_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="demoday_demoday_ticket_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>transaction_id</strong>: <em>required (string)</em><p>Payment ID i.e. (razorpay_payment_id)</p></li><li><strong>amount</strong>: <em>required (string)</em><p>Type should be integer. Amount should be 2000 or 1500 and amount multiply by 100 i.e. amount = 2000 multiply by 100</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "transaction_id": "pay_B7PuILH69aWA28",
+  "amount": "2000 multiply by 100"
+}</code></pre></div></div><div class="tab-pane" id="demoday_demoday_ticket_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Confirmed</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success" : "Confirmed successfully."
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#payment">/payment</a></li><li><a href="#allmembers">/allmembers</a></li><li><a href="#experthours">/experthours</a></li><li><a href="#demoday">/demoday</a></li></ul></div></div></div></div></body></html>

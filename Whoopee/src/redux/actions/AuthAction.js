@@ -5,13 +5,14 @@ import {ToastAndroid} from "react-native";
 
 const Whoopee_URL = 'http://1precent.com';
 
-export const AuthInfoAction = (first_name, last_name, email, accessToken) => {
+export const AuthInfoAction = (first_name, last_name, email, accessToken, id) => {
     return {
         type: LOGIN,
         first_name,
         last_name,
         email,
-        accessToken
+        accessToken,
+        id
     };
 };
 
@@ -22,7 +23,7 @@ export const UserCreatedAction = (userId) => {
     }
 };
 
-userCreate = (first_name, last_name, email, access_token, dispatch) => {
+userCreate = (first_name, last_name, email, access_token, id, dispatch) => {
     fetch(`${Whoopee_URL}/api/v1/userCreate/`, {
         method: 'POST',
         headers: {
@@ -33,7 +34,8 @@ userCreate = (first_name, last_name, email, access_token, dispatch) => {
             first_name,
             last_name,
             email,
-            access_token
+            access_token,
+            id
         })
     }).then(res => {
         if (res.ok) {
@@ -58,7 +60,7 @@ userCreate = (first_name, last_name, email, access_token, dispatch) => {
 
 export const FacebookManagerAction = () => {
     return dispatch => {
-        return LoginManager.logInWithReadPermissions(['public_profile'])
+        return LoginManager.logInWithReadPermissions(['public_profile', 'email'])
             .then(function (result) {
                 if (result.isCancelled) {
                     ToastAndroid.showWithGravityAndOffset(
@@ -85,16 +87,15 @@ export const FacebookManagerAction = () => {
                                     );
                                     dispatch(ModalAction(false));
                                 } else {
-                                    console.log(result)
-                                    this.userCreate(result.first_name, result.last_name, result.email, accessToken.toString(), dispatch);
-                                    dispatch(AuthInfoAction(result.first_name, result.last_name, result.email, accessToken.toString()));
+                                    this.userCreate(result.first_name, result.last_name, result.email, accessToken.toString(), result.id, dispatch);
+                                    dispatch(AuthInfoAction(result.first_name, result.last_name, result.email, accessToken.toString(), result.id));
                                 }
                             };
                             const infoRequest = new GraphRequest('/me', {
                                 accessToken: accessToken,
                                 parameters: {
                                     fields: {
-                                        string: 'email,name,first_name,middle_name,last_name'
+                                        string: 'name,first_name,middle_name,last_name,email,id'
                                     }
                                 }
                             }, responseInfoCallback);

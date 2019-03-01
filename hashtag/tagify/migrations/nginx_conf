@@ -1,0 +1,213 @@
+upstream web {
+  ip_hash;
+  server 142.93.211.56:8000;
+#  server channels:8000;
+}
+
+
+#server {
+#    listen 8001;
+#    server_name 206.189.130.109;
+
+ #   location = /favicon.ico { access_log off; log_not_found off; }
+ #   location /static/ {
+  #      alias /opt/firstproject/static/;
+   # }
+
+    #location / {
+     #   include         uwsgi_params;
+      #  uwsgi_pass      unix:/run/uwsgi/firstproject.sock;
+   # }
+#}
+
+# mysite_nginx.confunix:///home/ubuntu/uwsgi-tutorial/mysite/mysite.sock
+
+# the upstream component nginx needs to connect to
+#upstream django {
+ #    server unix:///home/ubuntu/uwsgi-tutorial/mysite/mysite/mysite.sock; # for a file socket
+ #   server 127.0.0.1:8001; # for a web port socket (we'll use this first)
+#}
+
+# configuration of the server
+server {
+    # the port your site will be served on
+    listen      80;
+    listen 443;
+    ssl on;
+    ssl_certificate  /etc/nginx/ssl/startupsclub.com.pem;
+    ssl_certificate_key  /etc/nginx/ssl/startupsclub.com.key;
+    root /opt/Vaheed/sc_website/build;
+    # the domain name it will serve for
+    server_name  startupsclub.com; # substitute your machine's IP address or FQDN
+    charset      utf-8;
+   
+    # max upload size
+    client_max_body_size 75M;   # adjust to taste
+    index index.html index.htm;
+    # Django media
+ #   location /media  {
+ #       alias /home/ubuntu/uwsgi-tutorial/mysite/media;  # your Django project's media files - amend as required
+#    }
+    
+
+    location / {
+      add_header 'Access-Control-Allow-Origin' *;
+      add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept";
+           root /opt/Vaheed/sc_website/build;
+    index index.html index.php;
+    try_files $uri /index.html;
+}
+
+}
+
+
+server {
+
+
+  #    listen 443;
+#    ssl on;
+#    ssl_certificate  /etc/nginx/ssl/startupsclub.com.pem;
+#    ssl_certificate_key  /etc/nginx/ssl/startupsclub.com.key;
+
+  location /static {
+        autoindex on;
+        alias /static;
+    }
+
+###################################################################################################################################################
+
+location / {
+     if ($request_method = 'OPTIONS') {
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, OPTIONS, DELETE';
+        #
+        # Custom headers and headers various browsers *should* be OK with but aren't
+        #
+   #     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,X-Custom-Header,Origin,Accept';
+        add_header 'Access-Control-Allow-Headers' '*';
+        #
+        # Tell client that this pre-flight info is valid for 20 days
+        #
+        add_header 'Access-Control-Max-Age' 1728000;
+        add_header 'Content-Type' 'application/x-www-form-urlencoded; charset=utf-8';
+        add_header 'Content-Length' 0;
+        return 204;
+     }
+     if ($request_method = 'POST') {
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, OPTIONS, DELETE';
+      #  add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,X-Custom-Header,Origin,Accept';
+add_header 'Access-Control-Allow-Headers' '*';
+
+ add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+        ######################
+     #   add_header 'Access-Control-Max-Age' 1728000;
+     #   add_header 'Content-Type' 'application/x-www-form-urlencoded; charset=utf-8';
+     #   add_header 'Content-Length' 0;
+     #   return 204;
+     }
+     if ($request_method = 'GET') {
+        add_header 'Access-Control-Allow-Origin' '*' always;
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, OPTIONS, DELETE' always;
+     #   add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,X-Custom-Header,Origin,Accept';
+add_header 'Access-Control-Allow-Headers' '*' always;
+add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+        #############################
+#        add_header 'Access-Control-Max-Age' 1728000;
+#        add_header 'Content-Type' 'application/x-www-form-urlencoded; charset=utf-8';
+#        add_header 'Content-Length' 0;
+#        return 204;
+     }
+
+     if ($request_method = 'PUT') {
+        add_header 'Access-Control-Allow-Origin' '*' always;
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, OPTIONS, DELETE' always;
+ #       add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,X-Custom-Header,Origin,Accept';
+add_header 'Access-Control-Allow-Headers' '*' always;
+ add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+        ###############################################
+#         add_header 'Access-Control-Max-Age' 1728000;
+#        add_header 'Content-Type' 'application/x-www-form-urlencoded; charset=utf-8';
+#        add_header 'Content-Length' 0;
+#        return 204;
+     }
+
+     if ($request_method = 'DELETE') {
+        add_header 'Access-Control-Allow-Origin' '*' always;
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, DELETE' always;
+   #     add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,X-Custom-Header,Origin,Accept';
+add_header 'Access-Control-Allow-Headers' '*' always;
+add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+        #####################################################
+#         add_header 'Access-Control-Max-Age' 1728000;
+#        add_header 'Content-Type' 'application/x-www-form-urlencoded; charset=utf-8';
+#        add_header 'Content-Length' 0;
+#        return 204;
+     }
+
+
+	    proxy_pass http://web;
+        proxy_cache_bypass http://web;
+
+        #proxy_pass http://channels:8000;
+        #proxy_cache_bypass http://channels:8000;
+
+        proxy_set_header Host $host:8000;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;        
+
+#        proxy_set_header X-Forwarded-Proto $scheme;
+#        proxy_set_header X-Forwarded-Ssl on;
+#        proxy_redirect off;
+
+
+
+
+}
+
+#############################################################################################################################################
+
+
+#//  location / {
+
+
+#//           charset utf-8;
+#//       add_header 'Access-Control-Allow-Origin' '*';
+#            add_header 'Access-Control-Allow-Credentials' 'true';
+
+     #   add_header Access-Control-Allow-Headers 'Origin, X-Requested-With, Content-Type, Accept';
+#//        add_header 'Access-Control-Allow-Methods' 'GET, POST, HEAD, PUT, OPTIONS, DELETE, PATCH';
+
+#      add_header 'Access-Control-Allow-Headers' 'Authorization, DNT, X-Mx-ReqToken, Keep-Alive, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type, X-Custom-Header, Origin, Accept';
+#//        add_header 'Access-Control-Allow-Headers' '*';
+#        add_header 'Access-Control-Max-Age' 1728000;
+# add_header 'Content-Type' 'text/html charset=UTF-8';
+#        add_header 'Content-Type' 'application/json charset=UTF-8';
+#        add_header 'Content-Length' 0;
+
+ #//       proxy_pass http://django:8000;
+ #//       proxy_cache_bypass http://django:8000;
+
+ #//    proxy_set_header Host $host:8000;
+ #//          proxy_set_header X-Real-IP $remote_addr;
+ #//          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+#//    }
+  
+  listen 8000;
+
+  server_name 142.93.211.56;
+}
+
+
+
+#server {
+ # location / {
+ #       proxy_pass http://cadvisor:8080;
+ #       proxy_cache_bypass http://cadvisor:8080;
+ #   }
+
+ # listen 8080;
+ # server_name 206.189.130.109;
+#}
+

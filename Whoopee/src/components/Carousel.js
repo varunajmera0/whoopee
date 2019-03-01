@@ -223,11 +223,9 @@ export default class Carousel extends Component {
                     <View key={index} style={{width: Dimensions.get('window').width,}}>
                         <View style={{flexDirection: 'row',}}>
                             <Left>
-                            
+                                <Icon type="FontAwesome" name='angle-double-left' onPress={() => this._prevPage(this.state.currentPage)}/>
                             </Left>
-
-                            <Right>
-                                <Icon type='MaterialIcons' name='content-copy' onPress={async () => {
+                            <Icon type='MaterialIcons' name='content-copy' onPress={async () => {
                                     await Clipboard.setString(c.props.children + "\n" +'- '+c.props.author);
                                     ToastAndroid.showWithGravityAndOffset(
                                         'Quote copied successfully!',
@@ -236,44 +234,21 @@ export default class Carousel extends Component {
                                         50,
                                         100,
                                     );
-                                    }} style={{paddingTop: 8, paddingRight: 5}}/>
+                            }} style={{paddingTop: 6, paddingRight: 5}}/>
+                            <Right>
+                                <Icon type="FontAwesome" name='angle-double-right' onPress={() => this._nextPage(this.state.currentPage)}/>
                             </Right>
                         </View>
                         <TouchableWithoutFeedback key={index} onPress={() => this.setState({currentPage: index})}>
-                            <View style={{
-                                width: Dimensions.get('window').width,
-                                flex: 0.9,
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                            }}>
-                                <View style={{width: '10%', alignItems: 'center', justifyContent: 'center'}}>
-                                    <TouchableWithoutFeedback onPress={() => this._prevPage(this.state.currentPage)}>
-                                        <View>
-                                            <Icon type="FontAwesome" name='angle-double-left' />
-                                        </View>
-                                    </TouchableWithoutFeedback>
-                                </View>
-                                
-                                <ScrollView style={{width: '80%',}} 
+                                <ScrollView style={{flex:1,}} 
                                 bounces
                                 decelerationRate={0.9}
-                            
                                 contentContainerStyle={{ flexGrow: 1 }}
                                 ref={c => this.scrollView = c}
-                            >
+                                >
                                     <Text adjustsFontSizeToFit={true} style={{ fontSize: 18, fontFamily: 'Comfortaa-Bold', textAlign: 'left'}}>{c.props.children}</Text>
                                     <Text style={{textAlign: 'right', fontSize: 18, fontFamily: 'Comfortaa-Bold',}}>{c.props.author ? '- '+c.props.author : ''}</Text>
                                 </ScrollView>
-                               
-                                <View style={{width: '10%', alignItems: 'center', justifyContent: 'center'}}>
-                                    <TouchableWithoutFeedback onPress={() => this._nextPage(this.state.currentPage)}>
-                                        <View>
-                                            <Icon type="FontAwesome" name='angle-double-right' />
-                                        </View>
-                                    </TouchableWithoutFeedback>
-                                </View>
-                            </View>
                         </TouchableWithoutFeedback>
                     </View>
                 );

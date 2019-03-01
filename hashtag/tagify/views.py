@@ -20,10 +20,10 @@ class UserCreate(views.APIView):
     def post(self, request, format=None):
         user = User.objects.filter(email=request.data.get('email'))
         if not user.exists():
-            userCreated = User.objects.create(first_name=request.data.get('first_name'), last_name=request.data.get('last_name'), email=request.data.get('email'), token=request.data.get('access_token'))
+            userCreated = User.objects.create(first_name=request.data.get('first_name'), last_name=request.data.get('last_name'), email=request.data.get('email'), user_id=request.data.get('id'), token=request.data.get('access_token'))
             return Response({'userId': userCreated.id}, status=status.HTTP_200_OK)
         else:
-            user.update(token=request.data.get('access_token'))
+            user.update(user_id=request.data.get('id'), token=request.data.get('access_token'))
         return Response({'userId': user.first().id}, status=status.HTTP_200_OK)
 
 
